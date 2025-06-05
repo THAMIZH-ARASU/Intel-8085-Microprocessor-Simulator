@@ -3,10 +3,10 @@ from tkinter import scrolledtext, messagebox, filedialog
 import threading
 import time
 
-from src.core.memory import Memory
-from src.core.cpu import CPU
-from src.core.assembler import Assembler
-from src.utils.logger import logger
+from src.core.Memory import Memory
+from src.core.CPU import CPU
+from src.core.Assembler import Assembler
+from src.utils.Logger import logger
 
 class SimulatorGUI:
     """8085 Simulator GUI Interface"""

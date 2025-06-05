@@ -1,5 +1,5 @@
 from typing import List
-from src.utils.logger import logger
+from src.utils.Logger import logger
 
 class Memory:
     """8085 Memory Management Unit - 64KB addressable space"""

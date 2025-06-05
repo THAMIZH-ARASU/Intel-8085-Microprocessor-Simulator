@@ -1,4 +1,4 @@
-from src.utils.logger import setup_logger
+from src.utils.Logger import setup_logger
 from src.gui.simulator_gui import SimulatorGUI
 
 def main():
