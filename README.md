@@ -31,7 +31,7 @@ Intel-8085-Microprocessor-Simulator
 │   └── Utils/
 │       ├── __init__.py
 │       └── Logger.py
-├── assembly_programs/
+├── AssemblyPrograms/
 │   ├── addition_example.asm
 │   ├── subtraction_example.asm
 │   ├── multiplication_example.asm
@@ -68,6 +68,24 @@ python run.py
    - Stop: Halt program execution
    - Reset: Reset the CPU to initial state
    - Load/Save: Load or save assembly code files
+
+## Output Screenshots
+
+The simulator provides a visual interface with several key components:
+
+1. **Code Editor**: Located at the top-left, where you can write and edit your assembly code
+2. **Memory Viewer**: Shows the contents of memory locations in hexadecimal format
+3. **Register Display**: Shows the current state of all CPU registers (A, B, C, D, E, H, L, SP, PC)
+4. **Status Flags**: Displays the state of all CPU flags (S, Z, AC, P, C)
+5. **Output Console**: Shows program output and error messages
+6. **Control Panel**: Contains buttons for Run, Step, Stop, and Reset operations
+
+To view the output:
+1. Load or write your assembly code
+2. Click "Assemble" to compile the code
+3. Use the Run or Step buttons to execute the program
+4. The Memory Viewer and Register Display will update in real-time
+5. Any program output will appear in the Output Console
 
 ## Memory Editor
 
