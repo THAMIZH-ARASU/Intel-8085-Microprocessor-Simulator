@@ -713,3 +713,21 @@
 2025-06-05 10:28:40,147 - INFO - Initializing 8085 Assembler
 2025-06-05 10:28:40,227 - INFO - GUI initialization complete
 2025-06-05 10:28:40,233 - INFO - Starting GUI main loop
+2025-06-05 10:39:44,579 - INFO - Initializing 8085 Simulator GUI
+2025-06-05 10:39:44,740 - INFO - Memory initialized with 64KB space
+2025-06-05 10:39:44,740 - INFO - CPU initialized
+2025-06-05 10:39:44,741 - INFO - CPU instruction set initialized
+2025-06-05 10:39:44,741 - INFO - Initializing 8085 Assembler
+2025-06-05 10:39:44,792 - INFO - GUI initialization complete
+2025-06-05 10:39:44,793 - INFO - Starting GUI main loop
+2025-06-05 10:40:18,130 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/multiplication_example.asm
+2025-06-05 10:40:42,686 - INFO - Wrote value 05 to address 9000
+2025-06-05 10:40:49,503 - INFO - Wrote value 03 to address 9001
+2025-06-05 10:40:53,460 - INFO - Read value 00 from address 9002
+2025-06-05 10:40:55,928 - INFO - Starting code assembly
+2025-06-05 10:40:55,929 - INFO - Starting assembly process
+2025-06-05 10:40:55,930 - INFO - Assembly complete - Generated 21 bytes of machine code
+2025-06-05 10:40:55,930 - INFO - Assembly successful - 21 bytes loaded
+2025-06-05 10:41:41,645 - INFO - Starting program execution
+2025-06-05 10:41:43,372 - INFO - Program halted
+2025-06-05 10:41:47,562 - INFO - Read value 0F from address 9002
