@@ -16,18 +16,28 @@ A Python-based simulator for the Intel 8085 microprocessor with a graphical user
 ## Project Structure
 
 ```
-src/
-├── core/               # Core simulator components
-│   ├── memory.py      # Memory management unit
-│   ├── alu.py         # Arithmetic Logic Unit
-│   ├── cpu.py         # CPU implementation
-│   └── assembler.py   # Assembly code parser
-├── gui/               # GUI components
-│   ├── simulator_gui.py  # Main GUI implementation
-│   └── widgets.py     # Custom GUI widgets
-├── utils/             # Utility functions
-│   └── logger.py      # Logging configuration
-└── main.py           # Application entry point
+.
+├── src/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── memory.py
+│   │   ├── alu.py
+│   │   ├── cpu.py
+│   │   └── assembler.py
+│   ├── gui/
+│   │   ├── __init__.py
+│   │   └── simulator_gui.py
+│   └── utils/
+│       ├── __init__.py
+│       └── logger.py
+├── assembly_programs/
+│   ├── addition_example.asm
+│   ├── subtraction_example.asm
+│   ├── multiplication_example.asm
+│   └── divide_example.asm
+├── run.py
+└── 8085_simulator.log
 ```
 
 ## Requirements
@@ -40,7 +50,7 @@ src/
 1. Clone the repository:
 ```bash
 git clone https://github.com/THAMIZHARASU/Intel-8085-Microprocessor-Simulator.git
-cd 8085-simulator
+cd simple8085
 ```
 
 2. Run the simulator:
