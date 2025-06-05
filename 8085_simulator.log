@@ -731,3 +731,34 @@
 2025-06-05 10:41:41,645 - INFO - Starting program execution
 2025-06-05 10:41:43,372 - INFO - Program halted
 2025-06-05 10:41:47,562 - INFO - Read value 0F from address 9002
+2025-06-05 10:46:15,286 - INFO - Initializing 8085 Simulator GUI
+2025-06-05 10:46:15,428 - INFO - Memory initialized with 64KB space
+2025-06-05 10:46:15,429 - INFO - CPU initialized
+2025-06-05 10:46:15,429 - INFO - CPU instruction set initialized
+2025-06-05 10:46:15,429 - INFO - Initializing 8085 Assembler
+2025-06-05 10:47:06,241 - INFO - Initializing 8085 Simulator GUI
+2025-06-05 10:47:06,393 - INFO - Memory initialized with 64KB space
+2025-06-05 10:47:06,393 - INFO - CPU initialized
+2025-06-05 10:47:06,393 - INFO - CPU instruction set initialized
+2025-06-05 10:47:06,394 - INFO - Initializing 8085 Assembler
+2025-06-05 10:47:06,454 - INFO - GUI initialization complete
+2025-06-05 10:47:06,454 - INFO - Starting GUI main loop
+2025-06-05 10:48:47,977 - INFO - Initializing 8085 Simulator GUI
+2025-06-05 10:48:48,138 - INFO - Memory initialized with 64KB space
+2025-06-05 10:48:48,139 - INFO - CPU initialized
+2025-06-05 10:48:48,139 - INFO - CPU instruction set initialized
+2025-06-05 10:48:48,140 - INFO - Initializing 8085 Assembler
+2025-06-05 10:48:48,182 - INFO - GUI initialization complete
+2025-06-05 10:48:48,183 - INFO - Starting GUI main loop
+2025-06-05 10:49:05,423 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/multiplication_example.asm
+2025-06-05 10:49:12,000 - INFO - Wrote value 05 to address 9000
+2025-06-05 10:49:24,189 - INFO - Wrote value 03 to address 9000
+2025-06-05 10:49:27,188 - INFO - Wrote value 05 to address 9000
+2025-06-05 10:49:35,192 - INFO - Wrote value 03 to address 9001
+2025-06-05 10:49:40,595 - INFO - Read value 00 from address 9002
+2025-06-05 10:49:42,273 - INFO - Starting code assembly
+2025-06-05 10:49:42,274 - INFO - Starting assembly process
+2025-06-05 10:49:42,275 - INFO - Assembly complete - Generated 21 bytes of machine code
+2025-06-05 10:49:42,275 - INFO - Assembly successful - 21 bytes loaded
+2025-06-05 10:49:55,019 - INFO - Starting program execution
+2025-06-05 10:49:56,739 - INFO - Program halted
