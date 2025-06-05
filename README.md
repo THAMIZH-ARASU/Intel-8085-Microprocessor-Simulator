@@ -16,21 +16,21 @@ A Python-based simulator for the Intel 8085 microprocessor with a graphical user
 ## Project Structure
 
 ```
-.
-├── src/
+Intel-8085-Microprocessor-Simulator
+├── Src/
 │   ├── __init__.py
-│   ├── core/
+│   ├── Core/
 │   │   ├── __init__.py
-│   │   ├── memory.py
-│   │   ├── alu.py
-│   │   ├── cpu.py
-│   │   └── assembler.py
-│   ├── gui/
+│   │   ├── Memory.py
+│   │   ├── ALU.py
+│   │   ├── CPU.py
+│   │   └── Assembler.py
+│   ├── Interface/
 │   │   ├── __init__.py
-│   │   └── simulator_gui.py
-│   └── utils/
+│   │   └── SimulatorGUI.py
+│   └── Utils/
 │       ├── __init__.py
-│       └── logger.py
+│       └── Logger.py
 ├── assembly_programs/
 │   ├── addition_example.asm
 │   ├── subtraction_example.asm

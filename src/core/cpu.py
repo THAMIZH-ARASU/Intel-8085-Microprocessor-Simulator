@@ -1,7 +1,7 @@
 from typing import Dict, List
-from src.core.Memory import Memory
-from src.core.ALU import ALU
-from src.utils.Logger import logger
+from Src.Core.Memory import Memory
+from Src.Core.ALU import ALU
+from Src.Utils.Logger import logger
 
 class CPU:
     """Intel 8085 CPU Core"""

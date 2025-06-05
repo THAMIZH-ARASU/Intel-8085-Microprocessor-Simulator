@@ -1,5 +1,5 @@
 from typing import Dict, List
-from src.utils.Logger import logger
+from Src.Utils.Logger import logger
 
 class Assembler:
     """Simple 8085 Assembler for converting assembly to machine code"""

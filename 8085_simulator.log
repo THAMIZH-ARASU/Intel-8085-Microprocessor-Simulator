@@ -706,3 +706,10 @@
 2025-06-05 10:10:44,297 - INFO - Starting program execution
 2025-06-05 10:10:45,007 - INFO - Program halted
 2025-06-05 10:10:53,542 - INFO - Read value 10 from address 9002
+2025-06-05 10:28:39,974 - INFO - Initializing 8085 Simulator GUI
+2025-06-05 10:28:40,145 - INFO - Memory initialized with 64KB space
+2025-06-05 10:28:40,146 - INFO - CPU initialized
+2025-06-05 10:28:40,146 - INFO - CPU instruction set initialized
+2025-06-05 10:28:40,147 - INFO - Initializing 8085 Assembler
+2025-06-05 10:28:40,227 - INFO - GUI initialization complete
+2025-06-05 10:28:40,233 - INFO - Starting GUI main loop

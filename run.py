@@ -1,5 +1,5 @@
-from src.utils.Logger import setup_logger
-from src.gui.simulator_gui import SimulatorGUI
+from Src.Utils.Logger import setup_logger
+from Src.Interface.SimulatorGUI import SimulatorGUI
 
 def main():
     """Main entry point for the 8085 simulator"""
