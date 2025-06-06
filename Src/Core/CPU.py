@@ -129,6 +129,55 @@ class CPU:
         instructions[0x4C] = self._mov_c_h  # MOV C,H
         instructions[0x4D] = self._mov_c_l  # MOV C,L
         instructions[0x4E] = self._mov_c_m  # MOV C,M
+
+        # Add D register MOV instructions
+        instructions[0x57] = self._mov_d_a  # MOV D,A
+        instructions[0x50] = self._mov_d_b  # MOV D,B
+        instructions[0x51] = self._mov_d_c  # MOV D,C
+        instructions[0x52] = self._mov_d_d  # MOV D,D
+        instructions[0x53] = self._mov_d_e  # MOV D,E
+        instructions[0x54] = self._mov_d_h  # MOV D,H
+        instructions[0x55] = self._mov_d_l  # MOV D,L
+        instructions[0x56] = self._mov_d_m  # MOV D,M
+
+        # Add E register MOV instructions
+        instructions[0x5F] = self._mov_e_a  # MOV E,A
+        instructions[0x58] = self._mov_e_b  # MOV E,B
+        instructions[0x59] = self._mov_e_c  # MOV E,C
+        instructions[0x5A] = self._mov_e_d  # MOV E,D
+        instructions[0x5B] = self._mov_e_e  # MOV E,E
+        instructions[0x5C] = self._mov_e_h  # MOV E,H
+        instructions[0x5D] = self._mov_e_l  # MOV E,L
+        instructions[0x5E] = self._mov_e_m  # MOV E,M
+
+        # Add H register MOV instructions
+        instructions[0x67] = self._mov_h_a  # MOV H,A
+        instructions[0x60] = self._mov_h_b  # MOV H,B
+        instructions[0x61] = self._mov_h_c  # MOV H,C
+        instructions[0x62] = self._mov_h_d  # MOV H,D
+        instructions[0x63] = self._mov_h_e  # MOV H,E
+        instructions[0x64] = self._mov_h_h  # MOV H,H
+        instructions[0x65] = self._mov_h_l  # MOV H,L
+        instructions[0x66] = self._mov_h_m  # MOV H,M
+
+        # Add L register MOV instructions
+        instructions[0x6F] = self._mov_l_a  # MOV L,A
+        instructions[0x68] = self._mov_l_b  # MOV L,B
+        instructions[0x69] = self._mov_l_c  # MOV L,C
+        instructions[0x6A] = self._mov_l_d  # MOV L,D
+        instructions[0x6B] = self._mov_l_e  # MOV L,E
+        instructions[0x6C] = self._mov_l_h  # MOV L,H
+        instructions[0x6D] = self._mov_l_l  # MOV L,L
+        instructions[0x6E] = self._mov_l_m  # MOV L,M
+
+        # Add M register MOV instructions
+        instructions[0x77] = self._mov_m_a  # MOV M,A
+        instructions[0x70] = self._mov_m_b  # MOV M,B
+        instructions[0x71] = self._mov_m_c  # MOV M,C
+        instructions[0x72] = self._mov_m_d  # MOV M,D
+        instructions[0x73] = self._mov_m_e  # MOV M,E
+        instructions[0x74] = self._mov_m_h  # MOV M,H
+        instructions[0x75] = self._mov_m_l  # MOV M,L
         
         # Immediate load instructions
         instructions[0x3E] = self._mvi_a   # MVI A,data
@@ -210,6 +259,11 @@ class CPU:
         instructions[0x2C] = self._inr_l   # INR L
         instructions[0x34] = self._inr_m   # INR M
         
+        instructions[0x03] = self._inx_b   # INX B
+        instructions[0x13] = self._inx_d   # INX D
+        instructions[0x23] = self._inx_h   # INX H
+        instructions[0x33] = self._inx_sp  # INX SP
+        
         instructions[0x3D] = self._dcr_a   # DCR A
         instructions[0x05] = self._dcr_b   # DCR B
         instructions[0x0D] = self._dcr_c   # DCR C
@@ -218,6 +272,11 @@ class CPU:
         instructions[0x25] = self._dcr_h   # DCR H
         instructions[0x2D] = self._dcr_l   # DCR L
         instructions[0x35] = self._dcr_m   # DCR M
+
+        instructions[0x0B] = self._dcx_b   # DCX B
+        instructions[0x1B] = self._dcx_d   # DCX B
+        instructions[0x2B] = self._dcx_h   # DCX B
+        instructions[0x3B] = self._dcx_sp   # DCX B
         
         # Jump Instructions
         instructions[0xC3] = self._jmp     # JMP addr
@@ -263,6 +322,7 @@ class CPU:
     def _mov_a_m(self): 
         addr = self.get_register_pair('H', 'L')
         self.registers['A'] = self.memory.read(addr)
+        logger.debug(f"MOV A,M: Reading from address {addr:04X}")
     
     def _mov_b_a(self): self.registers['B'] = self.registers['A']
     def _mov_b_b(self): self.registers['B'] = self.registers['B']
@@ -274,6 +334,7 @@ class CPU:
     def _mov_b_m(self): 
         addr = self.get_register_pair('H', 'L')
         self.registers['B'] = self.memory.read(addr)
+        logger.debug(f"MOV B,M: Reading from address {addr:04X}")
     
     def _mov_c_a(self): self.registers['C'] = self.registers['A']
     def _mov_c_b(self): self.registers['C'] = self.registers['B']
@@ -285,6 +346,7 @@ class CPU:
     def _mov_c_m(self): 
         addr = self.get_register_pair('H', 'L')
         self.registers['C'] = self.memory.read(addr)
+        logger.debug(f"MOV C,M: Reading from address {addr:04X}")
     
     def _mvi_a(self): self.registers['A'] = self.fetch_byte()
     def _mvi_b(self): self.registers['B'] = self.fetch_byte()
@@ -354,10 +416,13 @@ class CPU:
         self.update_flags(flags)
     
     def _add_m(self): 
+        """Add memory location pointed by HL to accumulator"""
         addr = self.get_register_pair('H', 'L')
-        result, flags = self.alu.add(self.registers['A'], self.memory.read(addr))
+        memory_value = self.memory.read(addr)
+        result, flags = self.alu.add(self.registers['A'], memory_value)
         self.registers['A'] = result
         self.update_flags(flags)
+        logger.debug(f"ADD M: A={self.registers['A']:02X} + M[{addr:04X}]={memory_value:02X} = {result:02X}")
     
     def _adi(self): 
         data = self.fetch_byte()
@@ -714,3 +779,140 @@ class CPU:
     
     def _nop(self): 
         pass  # No operation
+
+    def _mov_m_a(self):
+        """Move accumulator to memory location pointed by HL"""
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['A'])
+        logger.debug(f"MOV M,A: Writing {self.registers['A']:02X} to address {addr:04X}")
+
+    def _inx_b(self):
+        """Increment BC register pair"""
+        value = self.get_register_pair('B', 'C')
+        value = (value + 1) & 0xFFFF
+        self.set_register_pair('B', 'C', value)
+        logger.debug(f"INX B: BC={value:04X}")
+
+    def _inx_d(self):
+        """Increment DE register pair"""
+        value = self.get_register_pair('D', 'E')
+        value = (value + 1) & 0xFFFF
+        self.set_register_pair('D', 'E', value)
+        logger.debug(f"INX D: DE={value:04X}")
+
+    def _inx_h(self):
+        """Increment HL register pair"""
+        value = self.get_register_pair('H', 'L')
+        value = (value + 1) & 0xFFFF
+        self.set_register_pair('H', 'L', value)
+        logger.debug(f"INX H: HL={value:04X}")
+
+    def _inx_sp(self):
+        """Increment SP"""
+        value = self.SP
+        value = (value + 1) & 0xFFFF
+        self.SP = value
+        logger.debug(f"INX SP: SP={value:04X}")
+
+    def _dcx_b(self):
+        """Decrement BC register pair"""
+        value = self.get_register_pair('B', 'C')
+        value = (value - 1) & 0xFFFF
+        self.set_register_pair('B', 'C', value)
+        logger.debug(f"DCX B: BC={value:04X}")
+
+    def _dcx_d(self):
+        """Decrement DE register pair"""
+        value = self.get_register_pair('D', 'E')
+        value = (value - 1) & 0xFFFF
+        self.set_register_pair('D', 'E', value)
+        logger.debug(f"DCX B: BC={value:04X}")
+
+    def _dcx_h(self):
+        """Decrement HL register pair"""
+        value = self.get_register_pair('H', 'L')
+        value = (value - 1) & 0xFFFF
+        self.set_register_pair('H', 'L', value)
+        logger.debug(f"DCX B: BC={value:04X}")
+
+    def _dcx_sp(self):
+        """Decrement SP register"""
+        value = self.SP
+        value = (value - 1) & 0xFFFF
+        self.SP = value
+        logger.debug(f"DCX B: BC={value:04X}")
+
+    # Add D register MOV implementations
+    def _mov_d_a(self): self.registers['D'] = self.registers['A']
+    def _mov_d_b(self): self.registers['D'] = self.registers['B']
+    def _mov_d_c(self): self.registers['D'] = self.registers['C']
+    def _mov_d_d(self): self.registers['D'] = self.registers['D']
+    def _mov_d_e(self): self.registers['D'] = self.registers['E']
+    def _mov_d_h(self): self.registers['D'] = self.registers['H']
+    def _mov_d_l(self): self.registers['D'] = self.registers['L']
+    def _mov_d_m(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.registers['D'] = self.memory.read(addr)
+        logger.debug(f"MOV D,M: Reading from address {addr:04X}")
+
+    # Add E register MOV implementations
+    def _mov_e_a(self): self.registers['E'] = self.registers['A']
+    def _mov_e_b(self): self.registers['E'] = self.registers['B']
+    def _mov_e_c(self): self.registers['E'] = self.registers['C']
+    def _mov_e_d(self): self.registers['E'] = self.registers['D']
+    def _mov_e_e(self): self.registers['E'] = self.registers['E']
+    def _mov_e_h(self): self.registers['E'] = self.registers['H']
+    def _mov_e_l(self): self.registers['E'] = self.registers['L']
+    def _mov_e_m(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.registers['E'] = self.memory.read(addr)
+        logger.debug(f"MOV E,M: Reading from address {addr:04X}")
+
+    # Add H register MOV implementations
+    def _mov_h_a(self): self.registers['H'] = self.registers['A']
+    def _mov_h_b(self): self.registers['H'] = self.registers['B']
+    def _mov_h_c(self): self.registers['H'] = self.registers['C']
+    def _mov_h_d(self): self.registers['H'] = self.registers['D']
+    def _mov_h_e(self): self.registers['H'] = self.registers['E']
+    def _mov_h_h(self): self.registers['H'] = self.registers['H']
+    def _mov_h_l(self): self.registers['H'] = self.registers['L']
+    def _mov_h_m(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.registers['H'] = self.memory.read(addr)
+        logger.debug(f"MOV H,M: Reading from address {addr:04X}")
+
+    # Add L register MOV implementations
+    def _mov_l_a(self): self.registers['L'] = self.registers['A']
+    def _mov_l_b(self): self.registers['L'] = self.registers['B']
+    def _mov_l_c(self): self.registers['L'] = self.registers['C']
+    def _mov_l_d(self): self.registers['L'] = self.registers['D']
+    def _mov_l_e(self): self.registers['L'] = self.registers['E']
+    def _mov_l_h(self): self.registers['L'] = self.registers['H']
+    def _mov_l_l(self): self.registers['L'] = self.registers['L']
+    def _mov_l_m(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.registers['L'] = self.memory.read(addr)
+        logger.debug(f"MOV L,M: Reading from address {addr:04X}")
+
+    # Add M register MOV implementations
+    def _mov_m_b(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['B'])
+    def _mov_m_c(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['C'])
+    def _mov_m_d(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['D'])
+    def _mov_m_e(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['E'])
+        logger.debug(f"MOV M,E: Writing {self.registers['E']:02X} to address {addr:04X}")
+    def _mov_m_h(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['H'])
+        logger.debug(f"MOV M,H: Writing {self.registers['H']:02X} to address {addr:04X}")
+    def _mov_m_l(self): 
+        addr = self.get_register_pair('H', 'L')
+        self.memory.write(addr, self.registers['L'])
+        logger.debug(f"MOV M,L: Writing {self.registers['L']:02X} to address {addr:04X}")

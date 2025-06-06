@@ -14,6 +14,16 @@ class Assembler:
             'MOV B,E': 0x43, 'MOV B,H': 0x44, 'MOV B,L': 0x45, 'MOV B,M': 0x46,
             'MOV C,A': 0x4F, 'MOV C,B': 0x48, 'MOV C,C': 0x49, 'MOV C,D': 0x4A,
             'MOV C,E': 0x4B, 'MOV C,H': 0x4C, 'MOV C,L': 0x4D, 'MOV C,M': 0x4E,
+            'MOV D,A': 0x57, 'MOV D,B': 0x50, 'MOV D,C': 0x51, 'MOV D,D': 0x52,
+            'MOV D,E': 0x53, 'MOV D,H': 0x54, 'MOV D,L': 0x55, 'MOV D,M': 0x56,
+            'MOV E,A': 0x5F, 'MOV E,B': 0x58, 'MOV E,C': 0x59, 'MOV E,D': 0x5A,
+            'MOV E,E': 0x5B, 'MOV E,H': 0x5C, 'MOV E,L': 0x5D, 'MOV E,M': 0x5E,
+            'MOV H,A': 0x67, 'MOV H,B': 0x60, 'MOV H,C': 0x61, 'MOV H,D': 0x62,
+            'MOV H,E': 0x63, 'MOV H,H': 0x64, 'MOV H,L': 0x65, 'MOV H,M': 0x66,
+            'MOV L,A': 0x6F, 'MOV L,B': 0x68, 'MOV L,C': 0x69, 'MOV L,D': 0x6A,
+            'MOV L,E': 0x6B, 'MOV L,H': 0x6C, 'MOV L,L': 0x6D, 'MOV L,M': 0x6E,
+            'MOV M,A': 0x77, 'MOV M,B': 0x70, 'MOV M,C': 0x71, 'MOV M,D': 0x72,
+            'MOV M,E': 0x73, 'MOV M,H': 0x74, 'MOV M,L': 0x75,
             
             # Immediate
             'MVI A': 0x3E, 'MVI B': 0x06, 'MVI C': 0x0E, 'MVI D': 0x16,
@@ -46,9 +56,11 @@ class Assembler:
             # Increment/Decrement
             'INR A': 0x3C, 'INR B': 0x04, 'INR C': 0x0C, 'INR D': 0x14,
             'INR E': 0x1C, 'INR H': 0x24, 'INR L': 0x2C, 'INR M': 0x34,
+            'INX B': 0x03, 'INX D': 0x13, 'INX H': 0x23, 'INX SP': 0x33,
             
             'DCR A': 0x3D, 'DCR B': 0x05, 'DCR C': 0x0D, 'DCR D': 0x15,
             'DCR E': 0x1D, 'DCR H': 0x25, 'DCR L': 0x2D, 'DCR M': 0x35,
+            'DCX B': 0x0B, 'DCX D': 0x1B, 'DCX H': 0x2B, 'DCX SP': 0x3B,
             
             # Jump
             'JMP': 0xC3, 'JZ': 0xCA, 'JNZ': 0xC2, 'JC': 0xDA, 'JNC': 0xD2,

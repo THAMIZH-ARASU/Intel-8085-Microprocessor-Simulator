@@ -6,6 +6,9 @@ class ALU:
     @staticmethod
     def add(a: int, b: int, carry: bool = False) -> Tuple[int, Dict[str, bool]]:
         """8-bit addition with flags"""
+        if not (0 <= a <= 0xFF and 0 <= b <= 0xFF):
+            raise ValueError(f"Invalid operands for addition: a={a:02X}, b={b:02X}")
+            
         result = a + b + (1 if carry else 0)
         flags = {
             'C': result > 0xFF,

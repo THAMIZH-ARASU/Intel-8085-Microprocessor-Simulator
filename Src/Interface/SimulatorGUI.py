@@ -172,7 +172,7 @@ class SimulatorGUI:
             height=20,
             bg='#1e1e1e',
             fg='#ffffff',
-            font=('Consolas', 13),
+            font=('Consolas', 18),
             state=tk.DISABLED
         )
         self.memory_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
