@@ -2,6 +2,8 @@
 
 A Python-based simulator for the Intel 8085 microprocessor with a graphical user interface. This simulator allows you to write, assemble, and execute 8085 assembly code while visualizing the CPU state, memory contents, and program execution.
 
+> **Note:** This project is currently under active development. Features and functionality may change as development progresses.
+
 ## Features
 
 - Full 8085 instruction set support
