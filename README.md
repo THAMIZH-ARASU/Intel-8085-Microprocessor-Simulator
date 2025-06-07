@@ -51,7 +51,7 @@ Intel-8085-Microprocessor-Simulator
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/THAMIZHARASU/Intel-8085-Microprocessor-Simulator.git
+git clone https://github.com/THAMIZH-ARASU/Intel-8085-Microprocessor-Simulator.git
 cd simple8085
 ```
 
