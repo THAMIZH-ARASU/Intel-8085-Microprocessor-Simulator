@@ -37,7 +37,8 @@ Intel-8085-Microprocessor-Simulator
 │   ├── addition_example.asm
 │   ├── subtraction_example.asm
 │   ├── multiplication_example.asm
-│   └── divide_example.asm
+│   ├── divide_example.asm
+│   └── More...
 ├── run.py
 └── 8085_simulator.log
 ```
