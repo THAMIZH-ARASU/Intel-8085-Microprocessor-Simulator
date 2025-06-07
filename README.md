@@ -115,14 +115,6 @@ The simulator displays the following CPU status flags:
 - P (Parity): Set if result has even parity
 - C (Carry): Set if there's a carry from bit 7
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Technical Documentation
 
 ### Core Components
@@ -276,4 +268,12 @@ The Logger (`Src/Utils/Logger.py`) provides comprehensive logging:
    - Implement network simulation
    - Add real-time debugging
    - Support for program optimization
-   - Add performance analysis tools 
+   - Add performance analysis tools
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
