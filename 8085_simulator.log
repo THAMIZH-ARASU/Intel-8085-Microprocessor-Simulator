@@ -1751,3 +1751,23 @@
 2025-06-07 08:59:36,342 - INFO - Assembly complete - Generated 44 bytes of machine code
 2025-06-07 08:59:36,381 - INFO - Assembly successful - 44 bytes loaded
 2025-06-07 08:59:37,804 - INFO - Starting program execution
+2025-06-07 10:24:11,796 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 10:24:11,876 - INFO - Memory initialized with 64KB space
+2025-06-07 10:24:11,876 - INFO - CPU initialized
+2025-06-07 10:24:11,876 - INFO - CPU instruction set initialized
+2025-06-07 10:24:11,876 - INFO - Initializing 8085 Assembler
+2025-06-07 10:24:11,893 - INFO - GUI initialization complete
+2025-06-07 10:24:11,893 - INFO - Starting GUI main loop
+2025-06-07 10:24:22,059 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-06-07 10:24:40,496 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/factorial.asm
+2025-06-07 10:24:43,833 - INFO - Wrote value 05 to address 9000
+2025-06-07 10:24:52,605 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/factorial.asm
+2025-06-07 10:24:59,328 - INFO - Wrote value 05 to address 9000
+2025-06-07 10:25:02,840 - INFO - Starting code assembly
+2025-06-07 10:25:02,841 - INFO - Starting assembly process
+2025-06-07 10:25:02,841 - INFO - Assembly complete - Generated 31 bytes of machine code
+2025-06-07 10:25:02,858 - INFO - Assembly successful - 31 bytes loaded
+2025-06-07 10:25:20,353 - INFO - Read value 00 from address 9001
+2025-06-07 10:25:23,889 - INFO - Starting program execution
+2025-06-07 10:25:36,690 - INFO - Program halted
+2025-06-07 10:25:45,360 - INFO - Read value 78 from address 9001
