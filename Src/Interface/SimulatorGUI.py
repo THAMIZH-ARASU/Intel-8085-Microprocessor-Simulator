@@ -20,6 +20,7 @@ class SimulatorGUI:
         
         # Initialize simulator components
         self.memory = Memory()
+        self.memory.on_memory_write = self.on_memory_write  # Register memory write callback
         self.cpu = CPU(self.memory)
         self.assembler = Assembler()
         
@@ -409,6 +410,17 @@ class SimulatorGUI:
         except Exception as e:
             logger.error(f"Error resetting memory: {str(e)}")
             messagebox.showerror("Error", f"Failed to reset memory: {str(e)}")
+    
+    def on_memory_write(self, address: int, value: int):
+        """Callback for memory write operations"""
+        # Only update memory view if the written address is visible in the current view
+        try:
+            start_addr = int(self.addr_entry.get(), 16)
+            end_addr = start_addr + (16 * 16)  # 16 rows of 16 bytes
+            if start_addr <= address < end_addr:
+                self.update_memory_view()
+        except ValueError:
+            pass  # Ignore invalid address format
     
     def run(self):
         """Start the GUI main loop"""

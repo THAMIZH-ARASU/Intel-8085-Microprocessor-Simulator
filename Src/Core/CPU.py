@@ -129,7 +129,7 @@ class CPU:
         instructions[0x4C] = self._mov_c_h  # MOV C,H
         instructions[0x4D] = self._mov_c_l  # MOV C,L
         instructions[0x4E] = self._mov_c_m  # MOV C,M
-
+        
         # Add D register MOV instructions
         instructions[0x57] = self._mov_d_a  # MOV D,A
         instructions[0x50] = self._mov_d_b  # MOV D,B
@@ -230,6 +230,17 @@ class CPU:
         instructions[0x95] = self._sub_l   # SUB L
         instructions[0x96] = self._sub_m   # SUB M
         
+        instructions[0xD6] = self._sui     # SUI data
+        
+        instructions[0x9F] = self._sbb_a   # SBB A
+        instructions[0x98] = self._sbb_b   # SBB B
+        instructions[0x99] = self._sbb_c   # SBB C
+        instructions[0x9A] = self._sbb_d   # SBB D
+        instructions[0x9B] = self._sbb_e   # SBB E
+        instructions[0x9C] = self._sbb_h   # SBB H
+        instructions[0x9D] = self._sbb_l   # SBB L
+        instructions[0x9E] = self._sbb_m   # SBB M
+        
         # Logical Instructions
         instructions[0xA7] = self._ana_a   # ANA A
         instructions[0xA0] = self._ana_b   # ANA B
@@ -239,6 +250,15 @@ class CPU:
         instructions[0xA4] = self._ana_h   # ANA H
         instructions[0xA5] = self._ana_l   # ANA L
         instructions[0xA6] = self._ana_m   # ANA M
+        
+        instructions[0xAF] = self._xra_a   # XRA A
+        instructions[0xA8] = self._xra_b   # XRA B
+        instructions[0xA9] = self._xra_c   # XRA C
+        instructions[0xAA] = self._xra_d   # XRA D
+        instructions[0xAB] = self._xra_e   # XRA E
+        instructions[0xAC] = self._xra_h   # XRA H
+        instructions[0xAD] = self._xra_l   # XRA L
+        instructions[0xAE] = self._xra_m   # XRA M
         
         instructions[0xB7] = self._ora_a   # ORA A
         instructions[0xB0] = self._ora_b   # ORA B
@@ -303,11 +323,33 @@ class CPU:
         # Compare and rotate
         instructions[0xBF] = self._cmp_a   # CMP A
         instructions[0xB8] = self._cmp_b   # CMP B
+        instructions[0xB9] = self._cmp_c   # CMP C
+        instructions[0xBA] = self._cmp_d   # CMP D
+        instructions[0xBB] = self._cmp_e   # CMP E
+        instructions[0xBC] = self._cmp_h   # CMP H
+        instructions[0xBD] = self._cmp_l   # CMP L
+        instructions[0xBE] = self._cmp_m   # CMP M
         instructions[0xFE] = self._cpi     # CPI data
         
         # Control
         instructions[0x76] = self._hlt     # HLT
         instructions[0x00] = self._nop     # NOP
+        
+        # Rotate Instructions
+        instructions[0x07] = self._rlc     # RLC
+        instructions[0x0F] = self._rrc     # RRC
+        instructions[0x17] = self._ral     # RAL
+        instructions[0x1F] = self._rar     # RAR
+        
+        # Special Instructions
+        instructions[0x27] = self._daa     # DAA
+        instructions[0x2F] = self._cma     # CMA
+        instructions[0x37] = self._stc     # STC
+        instructions[0x3F] = self._cmc     # CMC
+        instructions[0xFB] = self._ei      # EI
+        instructions[0xF3] = self._di      # DI
+        instructions[0x20] = self._rim     # RIM
+        instructions[0x30] = self._sim     # SIM
         
         return instructions
     
@@ -769,6 +811,44 @@ class CPU:
         _, flags = self.alu.sub(self.registers['A'], self.registers['B'])
         self.update_flags(flags)
     
+    def _cmp_c(self): 
+        """Compare register C with accumulator"""
+        _, flags = self.alu.sub(self.registers['A'], self.registers['C'])
+        self.update_flags(flags)
+        logger.debug(f"CMP C: A={self.registers['A']:02X} - C={self.registers['C']:02X}")
+    
+    def _cmp_d(self): 
+        """Compare register D with accumulator"""
+        _, flags = self.alu.sub(self.registers['A'], self.registers['D'])
+        self.update_flags(flags)
+        logger.debug(f"CMP D: A={self.registers['A']:02X} - D={self.registers['D']:02X}")
+    
+    def _cmp_e(self): 
+        """Compare register E with accumulator"""
+        _, flags = self.alu.sub(self.registers['A'], self.registers['E'])
+        self.update_flags(flags)
+        logger.debug(f"CMP E: A={self.registers['A']:02X} - E={self.registers['E']:02X}")
+    
+    def _cmp_h(self): 
+        """Compare register H with accumulator"""
+        _, flags = self.alu.sub(self.registers['A'], self.registers['H'])
+        self.update_flags(flags)
+        logger.debug(f"CMP H: A={self.registers['A']:02X} - H={self.registers['H']:02X}")
+    
+    def _cmp_l(self): 
+        """Compare register L with accumulator"""
+        _, flags = self.alu.sub(self.registers['A'], self.registers['L'])
+        self.update_flags(flags)
+        logger.debug(f"CMP L: A={self.registers['A']:02X} - L={self.registers['L']:02X}")
+    
+    def _cmp_m(self): 
+        """Compare memory location pointed by HL with accumulator"""
+        addr = self.get_register_pair('H', 'L')
+        memory_value = self.memory.read(addr)
+        _, flags = self.alu.sub(self.registers['A'], memory_value)
+        self.update_flags(flags)
+        logger.debug(f"CMP M: A={self.registers['A']:02X} - M[{addr:04X}]={memory_value:02X}")
+    
     def _cpi(self): 
         data = self.fetch_byte()
         _, flags = self.alu.sub(self.registers['A'], data)
@@ -916,3 +996,207 @@ class CPU:
         addr = self.get_register_pair('H', 'L')
         self.memory.write(addr, self.registers['L'])
         logger.debug(f"MOV M,L: Writing {self.registers['L']:02X} to address {addr:04X}")
+
+    def _sui(self):
+        """Subtract immediate data from accumulator"""
+        data = self.fetch_byte()
+        logger.debug(f"SUI: Fetching immediate value: {data:02X}")
+        result, flags = self.alu.sub(self.registers['A'], data)
+        self.registers['A'] = result
+        self.update_flags(flags)
+        logger.debug(f"SUI: A={self.registers['A']:02X} - {data:02X} = {result:02X}")
+    
+    def _sbb_a(self):
+        """Subtract accumulator with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['A'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_b(self):
+        """Subtract register B with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['B'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_c(self):
+        """Subtract register C with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['C'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_d(self):
+        """Subtract register D with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['D'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_e(self):
+        """Subtract register E with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['E'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_h(self):
+        """Subtract register H with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['H'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_l(self):
+        """Subtract register L with borrow from accumulator"""
+        result, flags = self.alu.sub(self.registers['A'], self.registers['L'], self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _sbb_m(self):
+        """Subtract memory with borrow from accumulator"""
+        addr = self.get_register_pair('H', 'L')
+        memory_value = self.memory.read(addr)
+        result, flags = self.alu.sub(self.registers['A'], memory_value, self.flags['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_a(self):
+        """Exclusive OR accumulator with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['A'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_b(self):
+        """Exclusive OR register B with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['B'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_c(self):
+        """Exclusive OR register C with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['C'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_d(self):
+        """Exclusive OR register D with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['D'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_e(self):
+        """Exclusive OR register E with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['E'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_h(self):
+        """Exclusive OR register H with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['H'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_l(self):
+        """Exclusive OR register L with accumulator"""
+        result, flags = self.alu.xor(self.registers['A'], self.registers['L'])
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _xra_m(self):
+        """Exclusive OR memory with accumulator"""
+        addr = self.get_register_pair('H', 'L')
+        memory_value = self.memory.read(addr)
+        result, flags = self.alu.xor(self.registers['A'], memory_value)
+        self.registers['A'] = result
+        self.update_flags(flags)
+    
+    def _rlc(self):
+        """Rotate accumulator left"""
+        value = self.registers['A']
+        self.flags['C'] = bool(value & 0x80)
+        value = ((value << 1) | (value >> 7)) & 0xFF
+        self.registers['A'] = value
+        logger.debug(f"RLC: A={value:02X}")
+    
+    def _rrc(self):
+        """Rotate accumulator right"""
+        value = self.registers['A']
+        self.flags['C'] = bool(value & 0x01)
+        value = ((value >> 1) | (value << 7)) & 0xFF
+        self.registers['A'] = value
+        logger.debug(f"RRC: A={value:02X}")
+    
+    def _ral(self):
+        """Rotate accumulator left through carry"""
+        value = self.registers['A']
+        old_carry = self.flags['C']
+        self.flags['C'] = bool(value & 0x80)
+        value = ((value << 1) | int(old_carry)) & 0xFF
+        self.registers['A'] = value
+        logger.debug(f"RAL: A={value:02X}")
+    
+    def _rar(self):
+        """Rotate accumulator right through carry"""
+        value = self.registers['A']
+        old_carry = self.flags['C']
+        self.flags['C'] = bool(value & 0x01)
+        value = ((value >> 1) | (int(old_carry) << 7)) & 0xFF
+        self.registers['A'] = value
+        logger.debug(f"RAR: A={value:02X}")
+    
+    def _daa(self):
+        """Decimal adjust accumulator"""
+        value = self.registers['A']
+        lsb = value & 0x0F
+        msb = (value >> 4) & 0x0F
+        
+        if lsb > 9 or self.flags['AC']:
+            value += 6
+            self.flags['AC'] = True
+        
+        if msb > 9 or self.flags['C']:
+            value += 0x60
+            self.flags['C'] = True
+        
+        value &= 0xFF
+        self.registers['A'] = value
+        
+        # Update other flags
+        self.flags['Z'] = (value == 0)
+        self.flags['S'] = bool(value & 0x80)
+        self.flags['P'] = not bool(sum(1 for b in bin(value)[2:].zfill(8) if b == '1') % 2)
+        logger.debug(f"DAA: A={value:02X}")
+    
+    def _cma(self):
+        """Complement accumulator"""
+        self.registers['A'] = ~self.registers['A'] & 0xFF
+        logger.debug(f"CMA: A={self.registers['A']:02X}")
+    
+    def _stc(self):
+        """Set carry flag"""
+        self.flags['C'] = True
+        logger.debug("STC: Carry flag set")
+    
+    def _cmc(self):
+        """Complement carry flag"""
+        self.flags['C'] = not self.flags['C']
+        logger.debug(f"CMC: Carry flag = {self.flags['C']}")
+    
+    def _ei(self):
+        """Enable interrupts"""
+        self.interrupt_enabled = True
+        logger.debug("EI: Interrupts enabled")
+    
+    def _di(self):
+        """Disable interrupts"""
+        self.interrupt_enabled = False
+        logger.debug("DI: Interrupts disabled")
+    
+    def _rim(self):
+        """Read interrupt mask"""
+        # In a real 8085, this would read the interrupt mask and pending interrupts
+        # For simplicity, we'll just set the accumulator to 0
+        self.registers['A'] = 0
+        logger.debug("RIM: Read interrupt mask")
+    
+    def _sim(self):
+        """Set interrupt mask"""
+        # In a real 8085, this would set the interrupt mask
+        # For simplicity, we'll just ignore the value
+        logger.debug("SIM: Set interrupt mask")

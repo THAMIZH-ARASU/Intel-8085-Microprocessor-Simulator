@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Callable
 from Src.Utils.Logger import logger
 
 class Memory:
@@ -7,6 +7,7 @@ class Memory:
     def __init__(self):
         self.memory = [0x00] * 0x10000  # 64KB memory
         self.breakpoints = set()
+        self.on_memory_write: Callable[[int, int], None] = None  # Callback for memory writes
         logger.info("Memory initialized with 64KB space")
     
     def read(self, address: int) -> int:
@@ -23,6 +24,9 @@ class Memory:
         if 0 <= address <= 0xFFFF and 0 <= value <= 0xFF:
             self.memory[address] = value
             logger.debug(f"Memory WRITE: Address={address:04X}, Value={value:02X}")
+            # Notify callback if registered
+            if self.on_memory_write:
+                self.on_memory_write(address, value)
         else:
             logger.error(f"Invalid memory write: addr={address:04X}, val={value:02X}")
             raise ValueError(f"Invalid memory operation: addr={address:04X}, val={value:02X}")

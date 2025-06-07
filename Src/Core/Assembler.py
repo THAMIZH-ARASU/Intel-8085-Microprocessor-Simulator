@@ -73,10 +73,50 @@ class Assembler:
             'POP B': 0xC1, 'POP D': 0xD1, 'POP H': 0xE1, 'POP PSW': 0xF1,
             
             # Compare
-            'CMP A': 0xBF, 'CMP B': 0xB8, 'CPI': 0xFE,
+            'CMP A': 0xBF, 'CMP B': 0xB8, 'CMP C': 0xB9, 'CMP D': 0xBA,
+            'CMP E': 0xBB, 'CMP H': 0xBC, 'CMP L': 0xBD, 'CMP M': 0xBE,
+            'CPI': 0xFE,
             
             # Control
-            'HLT': 0x76, 'NOP': 0x00
+            'HLT': 0x76, 'NOP': 0x00,
+            
+            # Arithmetic Instructions
+            'SUI': 0xD6,  # Subtract immediate from accumulator
+            
+            'SBB A': 0x9F,  # Subtract with borrow accumulator from accumulator
+            'SBB B': 0x98,  # Subtract with borrow register B from accumulator
+            'SBB C': 0x99,  # Subtract with borrow register C from accumulator
+            'SBB D': 0x9A,  # Subtract with borrow register D from accumulator
+            'SBB E': 0x9B,  # Subtract with borrow register E from accumulator
+            'SBB H': 0x9C,  # Subtract with borrow register H from accumulator
+            'SBB L': 0x9D,  # Subtract with borrow register L from accumulator
+            'SBB M': 0x9E,  # Subtract with borrow memory from accumulator
+            
+            # Logical Instructions
+            'XRA A': 0xAF,  # Exclusive OR accumulator with accumulator
+            'XRA B': 0xA8,  # Exclusive OR register B with accumulator
+            'XRA C': 0xA9,  # Exclusive OR register C with accumulator
+            'XRA D': 0xAA,  # Exclusive OR register D with accumulator
+            'XRA E': 0xAB,  # Exclusive OR register E with accumulator
+            'XRA H': 0xAC,  # Exclusive OR register H with accumulator
+            'XRA L': 0xAD,  # Exclusive OR register L with accumulator
+            'XRA M': 0xAE,  # Exclusive OR memory with accumulator
+            
+            # Rotate Instructions
+            'RLC': 0x07,  # Rotate accumulator left
+            'RRC': 0x0F,  # Rotate accumulator right
+            'RAL': 0x17,  # Rotate accumulator left through carry
+            'RAR': 0x1F,  # Rotate accumulator right through carry
+            
+            # Special Instructions
+            'DAA': 0x27,  # Decimal adjust accumulator
+            'CMA': 0x2F,  # Complement accumulator
+            'STC': 0x37,  # Set carry flag
+            'CMC': 0x3F,  # Complement carry flag
+            'EI': 0xFB,   # Enable interrupts
+            'DI': 0xF3,   # Disable interrupts
+            'RIM': 0x20,  # Read interrupt mask
+            'SIM': 0x30,  # Set interrupt mask
         }
     
     def assemble(self, assembly_code: str) -> List[int]:
@@ -109,7 +149,7 @@ class Assembler:
                 processed_lines.append(line)
                 # Estimate instruction size
                 parts = line.split()
-                if parts[0] in ['MVI', 'ADI', 'CPI']:
+                if parts[0] in ['MVI', 'ADI', 'CPI', 'SUI']:
                     address += 2
                 elif parts[0] in ['LXI', 'LDA', 'STA', 'LHLD', 'SHLD', 'JMP', 'JZ', 'JNZ', 'JC', 'JNC', 'CALL']:
                     address += 3
@@ -134,8 +174,8 @@ class Assembler:
                 # Instruction with operand
                 operand = parts[1]
                 
-                if mnemonic in ['MVI', 'ADI', 'CPI']:
-                    # Handle MVI instruction
+                if mnemonic in ['MVI', 'ADI', 'CPI', 'SUI']:
+                    # Handle immediate instructions
                     if mnemonic == 'MVI':
                         reg = operand.split(',')[0].strip()
                         value_str = operand.split(',')[1].strip()
@@ -149,7 +189,7 @@ class Assembler:
                             machine_code.append(value)
                             logger.debug(f"Added MVI instruction: {self.opcodes[opcode_key]:02X} {value:02X}")
                     else:
-                        # Handle other immediate instructions
+                        # Handle other immediate instructions (ADI, CPI, SUI)
                         machine_code.append(self.opcodes[mnemonic])
                         if operand.startswith('#'):
                             value = int(operand[1:], 16)

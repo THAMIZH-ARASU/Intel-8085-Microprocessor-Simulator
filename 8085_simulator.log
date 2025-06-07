@@ -1466,3 +1466,288 @@
 2025-06-06 23:25:50,274 - INFO - Assembly successful - 31 bytes loaded
 2025-06-06 23:25:50,801 - INFO - Starting program execution
 2025-06-06 23:26:03,630 - INFO - Program halted
+2025-06-07 08:13:53,853 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:13:53,986 - INFO - Memory initialized with 64KB space
+2025-06-07 08:13:53,987 - INFO - CPU initialized
+2025-06-07 08:13:53,987 - INFO - CPU instruction set initialized
+2025-06-07 08:13:53,987 - INFO - Initializing 8085 Assembler
+2025-06-07 08:13:54,030 - INFO - GUI initialization complete
+2025-06-07 08:13:54,031 - INFO - Starting GUI main loop
+2025-06-07 08:13:59,364 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/factorial.asm
+2025-06-07 08:14:01,986 - INFO - Wrote value 03 to address 9000
+2025-06-07 08:14:02,602 - INFO - Starting code assembly
+2025-06-07 08:14:02,603 - INFO - Starting assembly process
+2025-06-07 08:14:02,603 - INFO - Assembly complete - Generated 31 bytes of machine code
+2025-06-07 08:14:02,604 - INFO - Assembly successful - 31 bytes loaded
+2025-06-07 08:14:03,131 - INFO - Starting program execution
+2025-06-07 08:14:09,599 - INFO - Program halted
+2025-06-07 08:14:27,594 - INFO - Starting code assembly
+2025-06-07 08:14:27,595 - INFO - Starting assembly process
+2025-06-07 08:14:27,596 - INFO - Assembly complete - Generated 31 bytes of machine code
+2025-06-07 08:14:27,596 - INFO - Assembly successful - 31 bytes loaded
+2025-06-07 08:14:32,226 - INFO - Wrote value 04 to address 9000
+2025-06-07 08:14:32,858 - INFO - Starting code assembly
+2025-06-07 08:14:32,859 - INFO - Starting assembly process
+2025-06-07 08:14:32,859 - INFO - Assembly complete - Generated 31 bytes of machine code
+2025-06-07 08:14:32,860 - INFO - Assembly successful - 31 bytes loaded
+2025-06-07 08:14:33,466 - INFO - Starting program execution
+2025-06-07 08:14:33,468 - INFO - Program halted
+2025-06-07 08:14:35,067 - INFO - Resetting CPU
+2025-06-07 08:14:35,067 - INFO - CPU initialized
+2025-06-07 08:14:35,068 - INFO - CPU instruction set initialized
+2025-06-07 08:14:36,155 - INFO - Starting program execution
+2025-06-07 08:14:45,555 - INFO - Program halted
+2025-06-07 08:15:21,719 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:15:21,871 - INFO - Memory initialized with 64KB space
+2025-06-07 08:15:21,871 - INFO - CPU initialized
+2025-06-07 08:15:21,872 - INFO - CPU instruction set initialized
+2025-06-07 08:15:21,873 - INFO - Initializing 8085 Assembler
+2025-06-07 08:15:21,933 - INFO - GUI initialization complete
+2025-06-07 08:15:21,934 - INFO - Starting GUI main loop
+2025-06-07 08:15:28,392 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-06-07 08:15:37,634 - INFO - Wrote value 05 to address 9000
+2025-06-07 08:15:46,010 - INFO - Wrote value 02 to address 9000
+2025-06-07 08:15:48,753 - INFO - Wrote value 05 to address 9000
+2025-06-07 08:15:51,626 - INFO - Wrote value 05 to address 9001
+2025-06-07 08:15:55,105 - INFO - Wrote value 02 to address 9001
+2025-06-07 08:16:00,657 - INFO - Wrote value 04 to address 9002
+2025-06-07 08:16:20,953 - INFO - Wrote value 05 to address 9001
+2025-06-07 08:16:27,401 - INFO - Wrote value 02 to address 9002
+2025-06-07 08:16:31,433 - INFO - Wrote value 04 to address 9003
+2025-06-07 08:16:36,648 - INFO - Wrote value 01 to address 9004
+2025-06-07 08:16:43,584 - INFO - Wrote value 03 to address 9005
+2025-06-07 08:16:53,121 - INFO - Starting code assembly
+2025-06-07 08:16:53,121 - INFO - Starting assembly process
+2025-06-07 08:16:53,122 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:16:53,122 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:17:22,473 - INFO - Starting program execution
+2025-06-07 08:17:34,605 - INFO - Program halted
+2025-06-07 08:17:47,464 - INFO - Resetting CPU
+2025-06-07 08:17:47,465 - INFO - CPU initialized
+2025-06-07 08:17:47,465 - INFO - CPU instruction set initialized
+2025-06-07 08:21:34,438 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:21:34,655 - INFO - Memory initialized with 64KB space
+2025-06-07 08:21:34,656 - INFO - CPU initialized
+2025-06-07 08:21:34,657 - INFO - CPU instruction set initialized
+2025-06-07 08:21:34,657 - INFO - Initializing 8085 Assembler
+2025-06-07 08:21:34,709 - INFO - GUI initialization complete
+2025-06-07 08:21:34,710 - INFO - Starting GUI main loop
+2025-06-07 08:21:43,295 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/fibonacci.asm
+2025-06-07 08:21:52,901 - INFO - Wrote value 08 to address 9000
+2025-06-07 08:22:00,165 - INFO - Starting code assembly
+2025-06-07 08:22:00,166 - INFO - Starting assembly process
+2025-06-07 08:22:00,167 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:22:00,167 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:22:02,229 - INFO - Starting program execution
+2025-06-07 08:22:09,851 - INFO - Program halted
+2025-06-07 08:22:26,486 - INFO - Wrote value 05 to address 9000
+2025-06-07 08:23:37,556 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:23:37,710 - INFO - Memory initialized with 64KB space
+2025-06-07 08:23:37,710 - INFO - CPU initialized
+2025-06-07 08:23:37,710 - INFO - CPU instruction set initialized
+2025-06-07 08:23:37,711 - INFO - Initializing 8085 Assembler
+2025-06-07 08:23:37,752 - INFO - GUI initialization complete
+2025-06-07 08:23:37,752 - INFO - Starting GUI main loop
+2025-06-07 08:23:45,420 - INFO - Wrote value 08 to address 9000
+2025-06-07 08:23:50,888 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/fibonacci.asm
+2025-06-07 08:23:56,972 - INFO - Starting code assembly
+2025-06-07 08:23:56,972 - INFO - Starting assembly process
+2025-06-07 08:23:56,973 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:23:56,974 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:23:59,220 - INFO - Starting program execution
+2025-06-07 08:24:06,849 - INFO - Program halted
+2025-06-07 08:24:21,096 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-06-07 08:24:24,436 - INFO - Starting code assembly
+2025-06-07 08:24:24,436 - INFO - Starting assembly process
+2025-06-07 08:24:24,437 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:24:24,437 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:24:26,267 - INFO - Starting code assembly
+2025-06-07 08:24:26,268 - INFO - Starting assembly process
+2025-06-07 08:24:26,269 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:24:26,269 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:25:09,995 - INFO - Starting code assembly
+2025-06-07 08:25:09,995 - INFO - Starting assembly process
+2025-06-07 08:25:09,996 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:25:10,020 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:25:26,211 - INFO - Starting program execution
+2025-06-07 08:25:26,213 - INFO - Program halted
+2025-06-07 08:25:28,779 - INFO - Resetting CPU
+2025-06-07 08:25:28,780 - INFO - CPU initialized
+2025-06-07 08:25:28,780 - INFO - CPU instruction set initialized
+2025-06-07 08:25:29,547 - INFO - Starting program execution
+2025-06-07 08:25:50,866 - INFO - Resetting CPU
+2025-06-07 08:25:50,867 - INFO - CPU initialized
+2025-06-07 08:25:50,867 - INFO - CPU instruction set initialized
+2025-06-07 08:25:50,871 - INFO - Execution stopped by user
+2025-06-07 08:25:52,802 - INFO - Starting program execution
+2025-06-07 08:26:03,442 - INFO - Resetting CPU
+2025-06-07 08:26:03,443 - INFO - CPU initialized
+2025-06-07 08:26:03,443 - INFO - CPU instruction set initialized
+2025-06-07 08:26:03,513 - INFO - Execution stopped by user
+2025-06-07 08:26:28,434 - INFO - Starting code assembly
+2025-06-07 08:26:28,435 - INFO - Starting assembly process
+2025-06-07 08:26:28,435 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:26:28,436 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:26:34,890 - INFO - Starting program execution
+2025-06-07 08:26:56,594 - INFO - Resetting CPU
+2025-06-07 08:26:56,595 - INFO - CPU initialized
+2025-06-07 08:26:56,595 - INFO - CPU instruction set initialized
+2025-06-07 08:26:56,659 - INFO - Execution stopped by user
+2025-06-07 08:27:05,482 - INFO - Starting code assembly
+2025-06-07 08:27:05,483 - INFO - Starting assembly process
+2025-06-07 08:27:05,483 - INFO - Assembly complete - Generated 28 bytes of machine code
+2025-06-07 08:27:05,496 - INFO - Assembly successful - 28 bytes loaded
+2025-06-07 08:27:06,594 - INFO - Resetting CPU
+2025-06-07 08:27:06,594 - INFO - CPU initialized
+2025-06-07 08:27:06,595 - INFO - CPU instruction set initialized
+2025-06-07 08:27:07,138 - INFO - Starting program execution
+2025-06-07 08:27:40,444 - INFO - Program halted
+2025-06-07 08:30:30,064 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:30:30,210 - INFO - Memory initialized with 64KB space
+2025-06-07 08:30:30,211 - INFO - CPU initialized
+2025-06-07 08:30:30,211 - INFO - CPU instruction set initialized
+2025-06-07 08:30:30,212 - INFO - Initializing 8085 Assembler
+2025-06-07 08:30:30,263 - INFO - GUI initialization complete
+2025-06-07 08:30:30,263 - INFO - Starting GUI main loop
+2025-06-07 08:30:39,847 - INFO - Wrote value 05 to address 9000
+2025-06-07 08:30:44,936 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-06-07 08:30:55,985 - INFO - Wrote value 05 to address 9001
+2025-06-07 08:31:00,072 - INFO - Wrote value 02 to address 9002
+2025-06-07 08:31:04,856 - INFO - Wrote value 04 to address 9003
+2025-06-07 08:31:10,880 - INFO - Wrote value 01 to address 9004
+2025-06-07 08:31:16,376 - INFO - Wrote value 03 to address 9005
+2025-06-07 08:31:21,783 - INFO - Starting code assembly
+2025-06-07 08:31:21,784 - INFO - Starting assembly process
+2025-06-07 08:31:21,784 - INFO - Assembly complete - Generated 29 bytes of machine code
+2025-06-07 08:31:21,785 - INFO - Assembly successful - 29 bytes loaded
+2025-06-07 08:31:24,119 - INFO - Starting program execution
+2025-06-07 08:31:36,213 - INFO - Program halted
+2025-06-07 08:31:48,705 - INFO - Saved assembly code to C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-06-07 08:33:56,643 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:33:56,787 - INFO - Memory initialized with 64KB space
+2025-06-07 08:33:56,788 - INFO - CPU initialized
+2025-06-07 08:33:56,788 - INFO - CPU instruction set initialized
+2025-06-07 08:33:56,788 - INFO - Initializing 8085 Assembler
+2025-06-07 08:33:56,853 - INFO - GUI initialization complete
+2025-06-07 08:33:56,854 - INFO - Starting GUI main loop
+2025-06-07 08:34:31,527 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:35:41,820 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:35:43,148 - INFO - Starting code assembly
+2025-06-07 08:35:43,148 - INFO - Starting assembly process
+2025-06-07 08:35:43,149 - INFO - Assembly complete - Generated 35 bytes of machine code
+2025-06-07 08:35:43,181 - INFO - Assembly successful - 35 bytes loaded
+2025-06-07 08:35:57,732 - INFO - Starting program execution
+2025-06-07 08:38:20,426 - INFO - Stopping program execution
+2025-06-07 08:38:20,491 - INFO - Execution stopped by user
+2025-06-07 08:38:21,178 - INFO - Resetting CPU
+2025-06-07 08:38:21,178 - INFO - CPU initialized
+2025-06-07 08:38:21,179 - INFO - CPU instruction set initialized
+2025-06-07 08:41:50,387 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:41:50,542 - INFO - Memory initialized with 64KB space
+2025-06-07 08:41:50,543 - INFO - CPU initialized
+2025-06-07 08:41:50,543 - INFO - CPU instruction set initialized
+2025-06-07 08:41:50,543 - INFO - Initializing 8085 Assembler
+2025-06-07 08:41:50,590 - INFO - GUI initialization complete
+2025-06-07 08:41:50,591 - INFO - Starting GUI main loop
+2025-06-07 08:41:58,764 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:42:15,056 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:42:22,872 - INFO - Starting code assembly
+2025-06-07 08:42:22,872 - INFO - Starting assembly process
+2025-06-07 08:42:22,873 - INFO - Assembly complete - Generated 35 bytes of machine code
+2025-06-07 08:42:22,873 - INFO - Assembly successful - 35 bytes loaded
+2025-06-07 08:42:23,687 - INFO - Starting program execution
+2025-06-07 08:44:01,760 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:44:01,922 - INFO - Memory initialized with 64KB space
+2025-06-07 08:44:01,923 - INFO - CPU initialized
+2025-06-07 08:44:01,924 - INFO - CPU instruction set initialized
+2025-06-07 08:44:01,924 - INFO - Initializing 8085 Assembler
+2025-06-07 08:44:01,992 - INFO - GUI initialization complete
+2025-06-07 08:44:01,993 - INFO - Starting GUI main loop
+2025-06-07 08:44:14,473 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:44:18,782 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:44:28,014 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:44:28,709 - INFO - Starting code assembly
+2025-06-07 08:44:28,710 - INFO - Starting assembly process
+2025-06-07 08:44:28,711 - INFO - Assembly complete - Generated 35 bytes of machine code
+2025-06-07 08:44:28,741 - INFO - Assembly successful - 35 bytes loaded
+2025-06-07 08:46:11,625 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:46:11,775 - INFO - Memory initialized with 64KB space
+2025-06-07 08:46:11,776 - INFO - CPU initialized
+2025-06-07 08:46:11,776 - INFO - CPU instruction set initialized
+2025-06-07 08:46:11,777 - INFO - Initializing 8085 Assembler
+2025-06-07 08:46:11,827 - INFO - GUI initialization complete
+2025-06-07 08:46:11,828 - INFO - Starting GUI main loop
+2025-06-07 08:46:16,594 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:46:21,029 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:46:22,133 - INFO - Starting code assembly
+2025-06-07 08:46:22,134 - INFO - Starting assembly process
+2025-06-07 08:46:22,134 - INFO - Assembly complete - Generated 35 bytes of machine code
+2025-06-07 08:46:22,166 - INFO - Assembly successful - 35 bytes loaded
+2025-06-07 08:46:23,237 - INFO - Starting program execution
+2025-06-07 08:48:03,124 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:48:03,277 - INFO - Memory initialized with 64KB space
+2025-06-07 08:48:03,278 - INFO - CPU initialized
+2025-06-07 08:48:03,278 - INFO - CPU instruction set initialized
+2025-06-07 08:48:03,279 - INFO - Initializing 8085 Assembler
+2025-06-07 08:48:03,330 - INFO - GUI initialization complete
+2025-06-07 08:48:03,330 - INFO - Starting GUI main loop
+2025-06-07 08:48:07,925 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:48:11,035 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:48:11,660 - INFO - Starting code assembly
+2025-06-07 08:48:11,660 - INFO - Starting assembly process
+2025-06-07 08:48:11,661 - INFO - Assembly complete - Generated 37 bytes of machine code
+2025-06-07 08:48:11,697 - INFO - Assembly successful - 37 bytes loaded
+2025-06-07 08:48:12,340 - INFO - Starting program execution
+2025-06-07 08:48:17,597 - INFO - Program halted
+2025-06-07 08:50:06,450 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:50:06,605 - INFO - Memory initialized with 64KB space
+2025-06-07 08:50:06,605 - INFO - CPU initialized
+2025-06-07 08:50:06,606 - INFO - CPU instruction set initialized
+2025-06-07 08:50:06,606 - INFO - Initializing 8085 Assembler
+2025-06-07 08:50:06,661 - INFO - GUI initialization complete
+2025-06-07 08:50:06,662 - INFO - Starting GUI main loop
+2025-06-07 08:50:20,090 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:50:21,058 - INFO - Starting code assembly
+2025-06-07 08:50:21,059 - INFO - Starting assembly process
+2025-06-07 08:50:21,059 - INFO - Assembly complete - Generated 24 bytes of machine code
+2025-06-07 08:50:21,081 - INFO - Assembly successful - 24 bytes loaded
+2025-06-07 08:50:21,954 - INFO - Starting program execution
+2025-06-07 08:53:49,077 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:53:49,227 - INFO - Memory initialized with 64KB space
+2025-06-07 08:53:49,228 - INFO - CPU initialized
+2025-06-07 08:53:49,228 - INFO - CPU instruction set initialized
+2025-06-07 08:53:49,229 - INFO - Initializing 8085 Assembler
+2025-06-07 08:53:49,290 - INFO - GUI initialization complete
+2025-06-07 08:53:49,290 - INFO - Starting GUI main loop
+2025-06-07 08:53:55,720 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:54:01,071 - INFO - Wrote value 8E to address 9000
+2025-06-07 08:54:01,872 - INFO - Starting code assembly
+2025-06-07 08:54:01,873 - INFO - Starting assembly process
+2025-06-07 08:54:01,873 - INFO - Assembly complete - Generated 44 bytes of machine code
+2025-06-07 08:54:01,915 - INFO - Assembly successful - 44 bytes loaded
+2025-06-07 08:54:02,864 - INFO - Starting program execution
+2025-06-07 08:54:15,887 - INFO - Stopping program execution
+2025-06-07 08:54:15,895 - INFO - Execution stopped by user
+2025-06-07 08:54:16,440 - INFO - Resetting CPU
+2025-06-07 08:54:16,440 - INFO - CPU initialized
+2025-06-07 08:54:16,441 - INFO - CPU instruction set initialized
+2025-06-07 08:58:53,158 - INFO - Initializing 8085 Simulator GUI
+2025-06-07 08:58:53,301 - INFO - Memory initialized with 64KB space
+2025-06-07 08:58:53,302 - INFO - CPU initialized
+2025-06-07 08:58:53,302 - INFO - CPU instruction set initialized
+2025-06-07 08:58:53,302 - INFO - Initializing 8085 Assembler
+2025-06-07 08:58:53,346 - INFO - GUI initialization complete
+2025-06-07 08:58:53,347 - INFO - Starting GUI main loop
+2025-06-07 08:59:12,252 - INFO - Wrote value 3F to address 9000
+2025-06-07 08:59:19,328 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/hexadecimal_to_decimal.asm
+2025-06-07 08:59:30,324 - INFO - Starting program execution
+2025-06-07 08:59:35,316 - INFO - Stopping program execution
+2025-06-07 08:59:35,378 - INFO - Execution stopped by user
+2025-06-07 08:59:35,588 - INFO - Resetting CPU
+2025-06-07 08:59:35,588 - INFO - CPU initialized
+2025-06-07 08:59:35,589 - INFO - CPU instruction set initialized
+2025-06-07 08:59:36,340 - INFO - Starting code assembly
+2025-06-07 08:59:36,341 - INFO - Starting assembly process
+2025-06-07 08:59:36,342 - INFO - Assembly complete - Generated 44 bytes of machine code
+2025-06-07 08:59:36,381 - INFO - Assembly successful - 44 bytes loaded
+2025-06-07 08:59:37,804 - INFO - Starting program execution

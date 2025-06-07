@@ -22,14 +22,21 @@ class ALU:
     @staticmethod
     def sub(a: int, b: int, borrow: bool = False) -> Tuple[int, Dict[str, bool]]:
         """8-bit subtraction with flags"""
+        if not (0 <= a <= 0xFF and 0 <= b <= 0xFF):
+            raise ValueError(f"Invalid operands for subtraction: a={a:02X}, b={b:02X}")
+            
+        # Calculate result with borrow
         result = a - b - (1 if borrow else 0)
+        
+        # Calculate flags
         flags = {
-            'C': result < 0,
+            'C': a < (b + (1 if borrow else 0)),  # Set carry if there's a borrow
             'Z': (result & 0xFF) == 0,
             'S': (result & 0x80) != 0,
             'P': bin(result & 0xFF).count('1') % 2 == 0,
             'AC': (a & 0x0F) < (b & 0x0F) + (1 if borrow else 0)
         }
+        
         return result & 0xFF, flags
     
     @staticmethod

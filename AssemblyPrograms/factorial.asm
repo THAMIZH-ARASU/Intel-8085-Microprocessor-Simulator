@@ -65,4 +65,4 @@ HLT          ; Halt the program
 ; Example usage:
 ; If memory location 9000H contains 05H
 ; After execution, memory location 9001H will contain 78H (5! = 120 decimal)
-; Note: This program handles small numbers only due to 8-bit limitations
+; Note: This program handles small numbers only due to 8-bit limitations 

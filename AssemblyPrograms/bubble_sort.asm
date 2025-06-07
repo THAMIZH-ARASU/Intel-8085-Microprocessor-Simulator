@@ -34,3 +34,4 @@ HLT          ; Halt the program
 ; If memory location 9000H contains 05H (array size = 5)
 ; And memory locations 9001H-9005H contain: 05H, 02H, 04H, 01H, 03H
 ; After execution, memory locations 9001H-9005H will contain: 01H, 02H, 03H, 04H, 05H 
+
