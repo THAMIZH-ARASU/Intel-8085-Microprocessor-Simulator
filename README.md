@@ -15,6 +15,33 @@ A Python-based simulator for the Intel 8085 microprocessor with a graphical user
 - File I/O for assembly code
 - Comprehensive logging
 
+## Output Screenshots
+
+The Interface Output:
+<p align="center">
+  <img src="Outputs/Interface.png" alt="Linear Regression Image">
+</p>
+
+The Terminal Log Output:
+<p align="center">
+  <img src="Outputs/TerminalLogs.png" alt="Linear Regression Image">
+</p>
+
+The simulator provides a visual interface with several key components:
+
+1. **Code Editor**: Located at the top-left, where you can write and edit your assembly code
+2. **Memory Viewer**: Shows the contents of memory locations in hexadecimal format
+3. **Register Display**: Shows the current state of all CPU registers (A, B, C, D, E, H, L, SP, PC)
+4. **Status Flags**: Displays the state of all CPU flags (S, Z, AC, P, C)
+5. **Control Panel**: Contains buttons for Run, Step, Stop, and Reset operations
+6. **Terminal**: Shows all kinds of log about the system in real time
+
+To view the output:
+1. Load or write your assembly code
+2. Click "Assemble" to compile the code
+3. Use the Run or Step buttons to execute the program
+4. The Memory Viewer and Register Display will update in real-time
+
 ## Project Structure
 
 ```
@@ -71,34 +98,6 @@ python run.py
    - Stop: Halt program execution
    - Reset: Reset the CPU to initial state
    - Load/Save: Load or save assembly code files
-
-## Output Screenshots
-
-The Interface Output:
-<p align="center">
-  <img src="Outputs/Interface.png" alt="Linear Regression Image">
-</p>
-
-The Terminal Log Output:
-<p align="center">
-  <img src="Outputs/TerminalLogs.png" alt="Linear Regression Image">
-</p>
-
-The simulator provides a visual interface with several key components:
-
-1. **Code Editor**: Located at the top-left, where you can write and edit your assembly code
-2. **Memory Viewer**: Shows the contents of memory locations in hexadecimal format
-3. **Register Display**: Shows the current state of all CPU registers (A, B, C, D, E, H, L, SP, PC)
-4. **Status Flags**: Displays the state of all CPU flags (S, Z, AC, P, C)
-5. **Control Panel**: Contains buttons for Run, Step, Stop, and Reset operations
-6. **Terminal**: Shows all kinds of log about the system in real time
-
-To view the output:
-1. Load or write your assembly code
-2. Click "Assemble" to compile the code
-3. Use the Run or Step buttons to execute the program
-4. The Memory Viewer and Register Display will update in real-time
-
 
 ## Memory Editor
 
