@@ -1885,3 +1885,17 @@
 2025-07-20 16:11:25,387 - INFO - Attempted step while CPU halted
 2025-07-20 16:11:26,066 - INFO - Attempted step while CPU halted
 2025-07-20 16:11:26,294 - INFO - Attempted step while CPU halted
+2025-07-20 16:29:30,225 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:29:30,307 - INFO - Memory initialized with 64KB space
+2025-07-20 16:29:30,308 - INFO - CPU initialized
+2025-07-20 16:29:30,308 - INFO - CPU instruction set initialized
+2025-07-20 16:29:30,308 - INFO - Initializing 8085 Assembler
+2025-07-20 16:29:30,328 - INFO - GUI initialization complete
+2025-07-20 16:29:30,329 - INFO - Starting GUI main loop
+2025-07-20 16:29:40,520 - INFO - Starting code assembly
+2025-07-20 16:29:40,521 - INFO - Starting assembly process
+2025-07-20 16:29:40,521 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:29:40,525 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:30:14,565 - INFO - Attempted step while CPU halted
+2025-07-20 16:30:15,201 - INFO - Attempted step while CPU halted
+2025-07-20 16:30:15,535 - INFO - Attempted step while CPU halted
