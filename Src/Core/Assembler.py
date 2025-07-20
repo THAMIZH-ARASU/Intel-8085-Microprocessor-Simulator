@@ -120,64 +120,71 @@ class Assembler:
         }
     
     def assemble(self, assembly_code: str) -> List[int]:
-        """Convert assembly code to machine code"""
+        """Convert assembly code to machine code with robust label support"""
         logger.info("Starting assembly process")
         machine_code = []
         lines = assembly_code.strip().split('\n')
         labels = {}
-        
-        # First pass: collect labels and remove comments
+        label_case_map = {}  # For case-insensitive lookup
+        org_address = 0x0000
         address = 0
         processed_lines = []
         
+        # First pass: collect labels and remove comments, handle ORG
         for line in lines:
             # Remove comments
             if ';' in line:
                 line = line.split(';')[0]
             line = line.strip()
-            
             if not line:
                 continue
-            
-            # Handle labels
+            # Handle ORG directive
+            if line.upper().startswith('ORG'):
+                parts = line.split()
+                if len(parts) == 2:
+                    if parts[1].startswith('#'):
+                        org_address = int(parts[1][1:], 16)
+                    else:
+                        org_address = int(parts[1])
+                    address = org_address
+                continue
+            # Handle labels (case-insensitive)
             if ':' in line:
                 label = line.split(':')[0].strip()
-                labels[label] = address
+                label_key = label.lower()
+                labels[label_key] = address
+                label_case_map[label_key] = label  # For error messages
                 line = line.split(':', 1)[1].strip()
-            
             if line:
                 processed_lines.append(line)
                 # Estimate instruction size
                 parts = line.split()
-                if parts[0] in ['MVI', 'ADI', 'CPI', 'SUI']:
+                if parts[0].upper() in ['MVI', 'ADI', 'CPI', 'SUI']:
                     address += 2
-                elif parts[0] in ['LXI', 'LDA', 'STA', 'LHLD', 'SHLD', 'JMP', 'JZ', 'JNZ', 'JC', 'JNC', 'CALL']:
+                elif parts[0].upper() in ['LXI', 'LDA', 'STA', 'LHLD', 'SHLD', 'JMP', 'JZ', 'JNZ', 'JC', 'JNC', 'CALL']:
                     address += 3
                 else:
                     address += 1
-        
         logger.debug(f"First pass complete. Labels: {labels}")
-        
         # Second pass: generate machine code
+        address = org_address
         for line in processed_lines:
             logger.debug(f"Processing instruction: {line}")
-            
             parts = line.split()
-            mnemonic = parts[0]
-            
+            mnemonic = parts[0].upper()
             if len(parts) == 1:
                 # Single instruction
                 if mnemonic in self.opcodes:
                     machine_code.append(self.opcodes[mnemonic])
                     logger.debug(f"Added opcode: {self.opcodes[mnemonic]:02X}")
+                else:
+                    raise ValueError(f"Unknown instruction: {mnemonic}")
             elif len(parts) == 2:
-                # Instruction with operand
-                operand = parts[1]
-                
+                operand = parts[1].strip()
+                # Handle immediate instructions
                 if mnemonic in ['MVI', 'ADI', 'CPI', 'SUI']:
-                    # Handle immediate instructions
                     if mnemonic == 'MVI':
-                        reg = operand.split(',')[0].strip()
+                        reg = operand.split(',')[0].strip().upper()
                         value_str = operand.split(',')[1].strip()
                         opcode_key = f'{mnemonic} {reg}'
                         if opcode_key in self.opcodes:
@@ -188,18 +195,22 @@ class Assembler:
                                 value = int(value_str)
                             machine_code.append(value)
                             logger.debug(f"Added MVI instruction: {self.opcodes[opcode_key]:02X} {value:02X}")
+                        else:
+                            raise ValueError(f"Unknown MVI register: {reg}")
                     else:
                         # Handle other immediate instructions (ADI, CPI, SUI)
-                        machine_code.append(self.opcodes[mnemonic])
-                        if operand.startswith('#'):
-                            value = int(operand[1:], 16)
+                        if mnemonic in self.opcodes:
+                            machine_code.append(self.opcodes[mnemonic])
+                            if operand.startswith('#'):
+                                value = int(operand[1:], 16)
+                            else:
+                                value = int(operand)
+                            machine_code.append(value)
+                            logger.debug(f"Added immediate instruction: {self.opcodes[mnemonic]:02X} {value:02X}")
                         else:
-                            value = int(operand)
-                        machine_code.append(value)
-                        logger.debug(f"Added immediate instruction: {self.opcodes[mnemonic]:02X} {value:02X}")
-                        
-                elif mnemonic in ['LXI']:
-                    reg_pair = operand.split(',')[0].strip()
+                            raise ValueError(f"Unknown instruction: {mnemonic}")
+                elif mnemonic == 'LXI':
+                    reg_pair = operand.split(',')[0].strip().upper()
                     value_str = operand.split(',')[1].strip()
                     opcode_key = f'{mnemonic} {reg_pair}'
                     if opcode_key in self.opcodes:
@@ -211,26 +222,37 @@ class Assembler:
                         machine_code.append(value & 0xFF)
                         machine_code.append((value >> 8) & 0xFF)
                         logger.debug(f"Added LXI instruction: {self.opcodes[opcode_key]:02X} {value:04X}")
-                
-                elif mnemonic in ['JMP', 'JZ', 'JNZ', 'JC', 'JNC', 'CALL', 'LDA', 'STA', 'LHLD', 'SHLD']:
-                    machine_code.append(self.opcodes[mnemonic])
-                    if operand in labels:
-                        addr = labels[operand]
-                        logger.debug(f"Resolved label {operand} to address {addr:04X}")
-                    elif operand.startswith('#'):
-                        addr = int(operand[1:], 16)
                     else:
-                        addr = int(operand)
-                    machine_code.append(addr & 0xFF)
-                    machine_code.append((addr >> 8) & 0xFF)
-                    logger.debug(f"Added {mnemonic} instruction: {self.opcodes[mnemonic]:02X} {addr:04X}")
-                
+                        raise ValueError(f"Unknown LXI register pair: {reg_pair}")
+                elif mnemonic in ['JMP', 'JZ', 'JNZ', 'JC', 'JNC', 'CALL', 'LDA', 'STA', 'LHLD', 'SHLD']:
+                    if mnemonic in self.opcodes:
+                        machine_code.append(self.opcodes[mnemonic])
+                        # Allow label or address (case-insensitive)
+                        op = operand.lower()
+                        if op in labels:
+                            addr = labels[op]
+                            logger.debug(f"Resolved label {label_case_map[op]} to address {addr:04X}")
+                        elif operand.startswith('#'):
+                            addr = int(operand[1:], 16)
+                        else:
+                            try:
+                                addr = int(operand)
+                            except Exception:
+                                raise ValueError(f"Unknown label or address: {operand}")
+                        machine_code.append(addr & 0xFF)
+                        machine_code.append((addr >> 8) & 0xFF)
+                        logger.debug(f"Added {mnemonic} instruction: {self.opcodes[mnemonic]:02X} {addr:04X}")
+                    else:
+                        raise ValueError(f"Unknown instruction: {mnemonic}")
                 else:
                     # Handle MOV, ADD, etc. with register operands
-                    full_mnemonic = f'{mnemonic} {operand}'
+                    full_mnemonic = f'{mnemonic} {operand.upper()}'.strip()
                     if full_mnemonic in self.opcodes:
                         machine_code.append(self.opcodes[full_mnemonic])
                         logger.debug(f"Added register instruction: {self.opcodes[full_mnemonic]:02X}")
-        
+                    else:
+                        raise ValueError(f"Unknown instruction: {full_mnemonic}")
+            else:
+                raise ValueError(f"Invalid instruction format: {line}")
         logger.info(f"Assembly complete - Generated {len(machine_code)} bytes of machine code")
         return machine_code

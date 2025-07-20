@@ -1771,3 +1771,117 @@
 2025-06-07 10:25:23,889 - INFO - Starting program execution
 2025-06-07 10:25:36,690 - INFO - Program halted
 2025-06-07 10:25:45,360 - INFO - Read value 78 from address 9001
+2025-07-20 16:01:22,331 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:01:22,452 - INFO - Memory initialized with 64KB space
+2025-07-20 16:01:22,453 - INFO - CPU initialized
+2025-07-20 16:01:22,453 - INFO - CPU instruction set initialized
+2025-07-20 16:01:22,453 - INFO - Initializing 8085 Assembler
+2025-07-20 16:01:22,476 - INFO - GUI initialization complete
+2025-07-20 16:01:22,476 - INFO - Starting GUI main loop
+2025-07-20 16:01:34,583 - INFO - Starting code assembly
+2025-07-20 16:01:34,584 - INFO - Starting assembly process
+2025-07-20 16:01:34,584 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:01:34,589 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:02:14,916 - INFO - Memory reset to zero
+2025-07-20 16:02:16,866 - INFO - Resetting CPU
+2025-07-20 16:02:16,866 - INFO - CPU initialized
+2025-07-20 16:02:16,866 - INFO - CPU instruction set initialized
+2025-07-20 16:02:19,057 - INFO - Starting code assembly
+2025-07-20 16:02:19,058 - INFO - Starting assembly process
+2025-07-20 16:02:19,058 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:02:19,062 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:02:45,761 - INFO - Resetting CPU
+2025-07-20 16:02:45,762 - INFO - CPU initialized
+2025-07-20 16:02:45,762 - INFO - CPU instruction set initialized
+2025-07-20 16:02:47,678 - INFO - Starting program execution
+2025-07-20 16:03:03,865 - INFO - Stopping program execution
+2025-07-20 16:03:03,885 - INFO - Execution stopped by user
+2025-07-20 16:03:06,348 - INFO - Starting code assembly
+2025-07-20 16:03:06,348 - INFO - Starting assembly process
+2025-07-20 16:03:06,349 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:03:06,353 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:03:08,025 - INFO - Resetting CPU
+2025-07-20 16:03:08,025 - INFO - CPU initialized
+2025-07-20 16:03:08,025 - INFO - CPU instruction set initialized
+2025-07-20 16:03:26,285 - INFO - Starting code assembly
+2025-07-20 16:03:26,285 - INFO - Starting assembly process
+2025-07-20 16:03:26,285 - ERROR - Assembly failed: Unknown label or address: hi
+2025-07-20 16:03:37,173 - INFO - Starting code assembly
+2025-07-20 16:03:37,173 - INFO - Starting assembly process
+2025-07-20 16:03:37,173 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:03:37,178 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:06:20,569 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:06:20,643 - INFO - Memory initialized with 64KB space
+2025-07-20 16:06:20,643 - INFO - CPU initialized
+2025-07-20 16:06:20,643 - INFO - CPU instruction set initialized
+2025-07-20 16:06:20,643 - INFO - Initializing 8085 Assembler
+2025-07-20 16:06:20,660 - INFO - GUI initialization complete
+2025-07-20 16:06:20,661 - INFO - Starting GUI main loop
+2025-07-20 16:06:24,228 - INFO - Starting code assembly
+2025-07-20 16:06:24,228 - INFO - Starting assembly process
+2025-07-20 16:06:24,228 - INFO - Assembly complete - Generated 8 bytes of machine code
+2025-07-20 16:06:24,233 - INFO - Assembly successful - 8 bytes loaded
+2025-07-20 16:06:32,461 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:32,714 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:32,893 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,043 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,209 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,390 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,548 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,724 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:33,882 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,074 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,251 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,431 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,638 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,810 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:34,990 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:35,192 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:35,370 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:35,550 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:35,730 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:35,919 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:36,134 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:36,355 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:36,536 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:36,742 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:36,918 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:37,099 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:37,485 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:37,676 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:37,870 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,049 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,240 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,435 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,631 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,795 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:38,968 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,156 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,327 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,488 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,661 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,823 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:39,994 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:40,175 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:40,355 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:40,544 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:40,874 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:41,047 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:41,213 - INFO - Attempted step while CPU halted
+2025-07-20 16:06:44,181 - INFO - Resetting CPU
+2025-07-20 16:06:44,182 - INFO - CPU initialized
+2025-07-20 16:06:44,182 - INFO - CPU instruction set initialized
+2025-07-20 16:07:12,085 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:07:12,157 - INFO - Memory initialized with 64KB space
+2025-07-20 16:07:12,157 - INFO - CPU initialized
+2025-07-20 16:07:12,157 - INFO - CPU instruction set initialized
+2025-07-20 16:07:12,157 - INFO - Initializing 8085 Assembler
+2025-07-20 16:07:12,174 - INFO - GUI initialization complete
+2025-07-20 16:07:12,174 - INFO - Starting GUI main loop
+2025-07-20 16:10:56,410 - INFO - Starting code assembly
+2025-07-20 16:10:56,410 - INFO - Starting assembly process
+2025-07-20 16:10:56,410 - INFO - Assembly complete - Generated 7 bytes of machine code
+2025-07-20 16:10:56,414 - INFO - Assembly successful - 7 bytes loaded
+2025-07-20 16:11:25,387 - INFO - Attempted step while CPU halted
+2025-07-20 16:11:26,066 - INFO - Attempted step while CPU halted
+2025-07-20 16:11:26,294 - INFO - Attempted step while CPU halted
