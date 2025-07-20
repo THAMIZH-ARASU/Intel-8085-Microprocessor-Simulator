@@ -16,7 +16,7 @@ class SimulatorGUI:
         self.root = tk.Tk()
         self.root.title("Intel 8085 Microprocessor Simulator")
         self.root.geometry("1400x900")  # Increased window size
-        self.root.configure(bg='#2c3e50')
+        self.root.configure(bg='#181c2f')
         
         # Initialize simulator components
         self.memory = Memory()
@@ -35,71 +35,71 @@ class SimulatorGUI:
     def create_widgets(self):
         """Create and layout GUI widgets"""
         # Main frame
-        main_frame = tk.Frame(self.root, bg='#2c3e50')
+        main_frame = tk.Frame(self.root, bg='#181c2f')
         main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Left panel - Code editor and controls
-        left_panel = tk.Frame(main_frame, bg='#34495e', relief=tk.RAISED, bd=2)
+        left_panel = tk.Frame(main_frame, bg='#232946', relief=tk.RAISED, bd=2)
         left_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 5))
         
         # Code editor
-        code_frame = tk.LabelFrame(left_panel, text="Assembly Code", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        code_frame = tk.LabelFrame(left_panel, text="Assembly Code", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         code_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         self.code_text = scrolledtext.ScrolledText(
             code_frame, 
             width=50,  # Increased width to match right side
             height=20,
-            bg='#1e1e1e',
-            fg='#ffffff',
-            insertbackground='white',
+            bg='#121629',
+            fg='#eebbc3',
+            insertbackground='#eebbc3',
             font=('Consolas', 13),
             wrap=tk.NONE
         )
         self.code_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
         # Memory Editor Section
-        mem_edit_frame = tk.LabelFrame(left_panel, text="Memory Editor", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        mem_edit_frame = tk.LabelFrame(left_panel, text="Memory Editor", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         mem_edit_frame.pack(fill=tk.X, padx=10, pady=5)
         
         # Memory editor controls
-        edit_controls = tk.Frame(mem_edit_frame, bg='#34495e')
+        edit_controls = tk.Frame(mem_edit_frame, bg='#232946')
         edit_controls.pack(fill=tk.X, padx=5, pady=5)
         
-        tk.Label(edit_controls, text="Address:", bg='#34495e', fg='white', font=('Arial', 12)).pack(side=tk.LEFT)
-        self.edit_addr_entry = tk.Entry(edit_controls, width=6, font=('Consolas', 12))
+        tk.Label(edit_controls, text="Address:", bg='#232946', fg='#eebbc3', font=('Arial', 12)).pack(side=tk.LEFT)
+        self.edit_addr_entry = tk.Entry(edit_controls, width=6, font=('Consolas', 12), bg='#232946', fg='#eebbc3', insertbackground='#eebbc3')
         self.edit_addr_entry.pack(side=tk.LEFT, padx=5)
         self.edit_addr_entry.insert(0, "9000")
         
-        tk.Label(edit_controls, text="Value:", bg='#34495e', fg='white', font=('Arial', 12)).pack(side=tk.LEFT, padx=(10,0))
-        self.edit_value_entry = tk.Entry(edit_controls, width=4, font=('Consolas', 12))
+        tk.Label(edit_controls, text="Value:", bg='#232946', fg='#eebbc3', font=('Arial', 12)).pack(side=tk.LEFT, padx=(10,0))
+        self.edit_value_entry = tk.Entry(edit_controls, width=4, font=('Consolas', 12), bg='#232946', fg='#eebbc3', insertbackground='#eebbc3')
         self.edit_value_entry.pack(side=tk.LEFT, padx=5)
         
-        tk.Button(edit_controls, text="Write", command=self.write_memory_byte, bg='#27ae60', fg='white', font=('Arial', 11)).pack(side=tk.LEFT, padx=5)
-        tk.Button(edit_controls, text="Read", command=self.read_memory_byte, bg='#3498db', fg='white', font=('Arial', 11)).pack(side=tk.LEFT, padx=5)
+        tk.Button(edit_controls, text="Write", command=self.write_memory_byte, bg='#43d9ad', fg='#181c2f', font=('Arial', 11, 'bold')).pack(side=tk.LEFT, padx=5)
+        tk.Button(edit_controls, text="Read", command=self.read_memory_byte, bg='#eebbc3', fg='#181c2f', font=('Arial', 11, 'bold')).pack(side=tk.LEFT, padx=5)
         
         # Control buttons
-        control_frame = tk.Frame(left_panel, bg='#34495e')
+        control_frame = tk.Frame(left_panel, bg='#232946')
         control_frame.pack(fill=tk.X, padx=10, pady=5)
         
-        btn_style = {'bg': '#3498db', 'fg': 'white', 'font': ('Arial', 12, 'bold'), 'relief': tk.RAISED, 'bd': 2}
+        btn_style = {'bg': '#f6c177', 'fg': '#181c2f', 'font': ('Arial', 12, 'bold'), 'relief': tk.RAISED, 'bd': 2}
         
         tk.Button(control_frame, text="Assemble", command=self.assemble_code, **btn_style).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Run", command=self.run_program, **btn_style).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Step", command=self.step_program, **btn_style).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Reset", command=self.reset_cpu, **btn_style).pack(side=tk.LEFT, padx=2)
-        tk.Button(control_frame, text="Stop", command=self.stop_program, bg='#e74c3c', fg='white', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
+        tk.Button(control_frame, text="Stop", command=self.stop_program, bg='#ff595e', fg='#fff', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
         # Add Load and Save buttons
-        tk.Button(control_frame, text="Load .asm", command=self.load_asm_file, bg='#27ae60', fg='white', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
-        tk.Button(control_frame, text="Save .asm", command=self.save_asm_file, bg='#27ae60', fg='white', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
+        tk.Button(control_frame, text="Load .asm", command=self.load_asm_file, bg='#43d9ad', fg='#181c2f', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
+        tk.Button(control_frame, text="Save .asm", command=self.save_asm_file, bg='#43d9ad', fg='#181c2f', font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
         # Right panel - CPU state and memory
-        right_panel = tk.Frame(main_frame, bg='#34495e')
+        right_panel = tk.Frame(main_frame, bg='#232946')
         right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=(5, 0))
         
         # CPU Registers
-        reg_frame = tk.LabelFrame(right_panel, text="CPU Registers", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        reg_frame = tk.LabelFrame(right_panel, text="CPU Registers", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         reg_frame.pack(fill=tk.X, padx=10, pady=5)
         
         self.reg_labels = {}
@@ -109,70 +109,70 @@ class SimulatorGUI:
         ]
         
         for i, (reg, desc) in enumerate(reg_info):
-            frame = tk.Frame(reg_frame, bg='#34495e')
+            frame = tk.Frame(reg_frame, bg='#232946')
             frame.pack(fill=tk.X, padx=5, pady=2)
             
-            tk.Label(frame, text=f"{reg}:", bg='#34495e', fg='white', font=('Consolas', 12, 'bold')).pack(side=tk.LEFT)
-            self.reg_labels[reg] = tk.Label(frame, text="00", bg='#2c3e50', fg='#00ff00', font=('Consolas', 14, 'bold'), width=4)
+            tk.Label(frame, text=f"{reg}:", bg='#232946', fg='#eebbc3', font=('Consolas', 12, 'bold')).pack(side=tk.LEFT)
+            self.reg_labels[reg] = tk.Label(frame, text="00", bg='#181c2f', fg='#43d9ad', font=('Consolas', 14, 'bold'), width=4)
             self.reg_labels[reg].pack(side=tk.LEFT, padx=5)
-            tk.Label(frame, text=desc, bg='#34495e', fg='#bdc3c7', font=('Arial', 11)).pack(side=tk.LEFT, padx=10)
+            tk.Label(frame, text=desc, bg='#232946', fg='#b8c1ec', font=('Arial', 11)).pack(side=tk.LEFT, padx=10)
         
         # 16-bit registers
-        reg16_frame = tk.LabelFrame(right_panel, text="16-bit Registers", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        reg16_frame = tk.LabelFrame(right_panel, text="16-bit Registers", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         reg16_frame.pack(fill=tk.X, padx=10, pady=5)
         
         reg16_info = [('PC', 'Program Counter'), ('SP', 'Stack Pointer')]
         
         for reg, desc in reg16_info:
-            frame = tk.Frame(reg16_frame, bg='#34495e')
+            frame = tk.Frame(reg16_frame, bg='#232946')
             frame.pack(fill=tk.X, padx=5, pady=2)
             
-            tk.Label(frame, text=f"{reg}:", bg='#34495e', fg='white', font=('Consolas', 12, 'bold')).pack(side=tk.LEFT)
-            self.reg_labels[reg] = tk.Label(frame, text="0000", bg='#2c3e50', fg='#00ff00', font=('Consolas', 14, 'bold'), width=6)
+            tk.Label(frame, text=f"{reg}:", bg='#232946', fg='#eebbc3', font=('Consolas', 12, 'bold')).pack(side=tk.LEFT)
+            self.reg_labels[reg] = tk.Label(frame, text="0000", bg='#181c2f', fg='#43d9ad', font=('Consolas', 14, 'bold'), width=6)
             self.reg_labels[reg].pack(side=tk.LEFT, padx=5)
-            tk.Label(frame, text=desc, bg='#34495e', fg='#bdc3c7', font=('Arial', 11)).pack(side=tk.LEFT, padx=10)
+            tk.Label(frame, text=desc, bg='#232946', fg='#b8c1ec', font=('Arial', 11)).pack(side=tk.LEFT, padx=10)
         
         # Flags
-        flags_frame = tk.LabelFrame(right_panel, text="Status Flags", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        flags_frame = tk.LabelFrame(right_panel, text="Status Flags", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         flags_frame.pack(fill=tk.X, padx=10, pady=5)
         
         self.flag_labels = {}
         flags_info = [('S', 'Sign'), ('Z', 'Zero'), ('AC', 'Aux Carry'), ('P', 'Parity'), ('C', 'Carry')]
         
-        flags_grid = tk.Frame(flags_frame, bg='#34495e')
+        flags_grid = tk.Frame(flags_frame, bg='#232946')
         flags_grid.pack(padx=5, pady=5)
         
         for i, (flag, desc) in enumerate(flags_info):
-            frame = tk.Frame(flags_grid, bg='#34495e')
+            frame = tk.Frame(flags_grid, bg='#232946')
             frame.grid(row=i//3, column=i%3, padx=5, pady=2, sticky='w')
             
-            tk.Label(frame, text=f"{flag}:", bg='#34495e', fg='white', font=('Consolas', 11, 'bold')).pack(side=tk.LEFT)
-            self.flag_labels[flag] = tk.Label(frame, text="0", bg='#2c3e50', fg='#ff6b6b', font=('Consolas', 12, 'bold'), width=2)
+            tk.Label(frame, text=f"{flag}:", bg='#232946', fg='#eebbc3', font=('Consolas', 11, 'bold')).pack(side=tk.LEFT)
+            self.flag_labels[flag] = tk.Label(frame, text="0", bg='#181c2f', fg='#ff595e', font=('Consolas', 12, 'bold'), width=2)
             self.flag_labels[flag].pack(side=tk.LEFT, padx=2)
         
         # Memory viewer
-        mem_frame = tk.LabelFrame(right_panel, text="Memory View", bg='#34495e', fg='white', font=('Arial', 14, 'bold'))
+        mem_frame = tk.LabelFrame(right_panel, text="Memory View", bg='#232946', fg='#f6c177', font=('Arial', 14, 'bold'))
         mem_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
         # Memory address input
-        addr_frame = tk.Frame(mem_frame, bg='#34495e')
+        addr_frame = tk.Frame(mem_frame, bg='#232946')
         addr_frame.pack(fill=tk.X, padx=5, pady=5)
         
-        tk.Label(addr_frame, text="Address:", bg='#34495e', fg='white', font=('Arial', 12)).pack(side=tk.LEFT)
-        self.addr_entry = tk.Entry(addr_frame, width=6, font=('Consolas', 12))
+        tk.Label(addr_frame, text="Address:", bg='#232946', fg='#eebbc3', font=('Arial', 12)).pack(side=tk.LEFT)
+        self.addr_entry = tk.Entry(addr_frame, width=6, font=('Consolas', 12), bg='#232946', fg='#eebbc3', insertbackground='#eebbc3')
         self.addr_entry.pack(side=tk.LEFT, padx=5)
         self.addr_entry.insert(0, "8000")
         
-        tk.Button(addr_frame, text="View", command=self.update_memory_view, bg='#27ae60', fg='white', font=('Arial', 11)).pack(side=tk.LEFT, padx=5)
-        tk.Button(addr_frame, text="Reset Memory", command=self.reset_memory, bg='#e74c3c', fg='white', font=('Arial', 11)).pack(side=tk.LEFT, padx=5)
+        tk.Button(addr_frame, text="View", command=self.update_memory_view, bg='#43d9ad', fg='#181c2f', font=('Arial', 11, 'bold')).pack(side=tk.LEFT, padx=5)
+        tk.Button(addr_frame, text="Reset Memory", command=self.reset_memory, bg='#ff595e', fg='#fff', font=('Arial', 11, 'bold')).pack(side=tk.LEFT, padx=5)
         
         # Memory display
         self.memory_text = scrolledtext.ScrolledText(
             mem_frame,
             width=50,  # Matched width with code editor
             height=20,
-            bg='#1e1e1e',
-            fg='#ffffff',
+            bg='#121629',
+            fg='#eebbc3',
             font=('Consolas', 18),
             state=tk.DISABLED
         )
@@ -182,8 +182,8 @@ class SimulatorGUI:
         self.status_bar = tk.Label(
             self.root,
             text="Ready",
-            bg='#2c3e50',
-            fg='#ecf0f1',
+            bg='#181c2f',
+            fg='#f6c177',
             font=('Arial', 12),
             relief=tk.SUNKEN,
             anchor=tk.W

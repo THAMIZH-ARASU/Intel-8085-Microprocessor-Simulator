@@ -1899,3 +1899,42 @@
 2025-07-20 16:30:14,565 - INFO - Attempted step while CPU halted
 2025-07-20 16:30:15,201 - INFO - Attempted step while CPU halted
 2025-07-20 16:30:15,535 - INFO - Attempted step while CPU halted
+2025-07-20 16:46:03,593 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:46:03,672 - INFO - Memory initialized with 64KB space
+2025-07-20 16:46:03,672 - INFO - CPU initialized
+2025-07-20 16:46:03,673 - INFO - CPU instruction set initialized
+2025-07-20 16:46:03,673 - INFO - Initializing 8085 Assembler
+2025-07-20 16:46:03,695 - INFO - GUI initialization complete
+2025-07-20 16:46:03,695 - INFO - Starting GUI main loop
+2025-07-20 16:46:40,379 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-07-20 16:46:45,826 - INFO - Starting code assembly
+2025-07-20 16:46:45,826 - INFO - Starting assembly process
+2025-07-20 16:46:45,827 - INFO - Assembly complete - Generated 29 bytes of machine code
+2025-07-20 16:46:45,845 - INFO - Assembly successful - 29 bytes loaded
+2025-07-20 16:47:15,809 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/string_length.asm
+2025-07-20 16:47:18,819 - INFO - Memory reset to zero
+2025-07-20 16:47:23,625 - INFO - Starting code assembly
+2025-07-20 16:47:23,625 - INFO - Starting assembly process
+2025-07-20 16:47:23,625 - INFO - Assembly complete - Generated 22 bytes of machine code
+2025-07-20 16:47:23,637 - INFO - Assembly successful - 22 bytes loaded
+2025-07-20 16:48:11,536 - INFO - Wrote value 48 to address 8050
+2025-07-20 16:48:20,693 - INFO - Wrote value 45 to address 8051
+2025-07-20 16:48:31,411 - INFO - Wrote value 4C to address 8052
+2025-07-20 16:48:35,417 - INFO - Wrote value 4C to address 8053
+2025-07-20 16:50:12,005 - INFO - Wrote value 4F to address 8055
+2025-07-20 16:50:18,020 - INFO - Wrote value 4F to address 8054
+2025-07-20 16:50:27,276 - INFO - Wrote value 00 to address 8055
+2025-07-20 16:50:52,615 - INFO - Starting code assembly
+2025-07-20 16:50:52,615 - INFO - Starting assembly process
+2025-07-20 16:50:52,615 - INFO - Assembly complete - Generated 22 bytes of machine code
+2025-07-20 16:50:52,627 - INFO - Assembly successful - 22 bytes loaded
+2025-07-20 16:50:55,310 - INFO - Starting code assembly
+2025-07-20 16:50:55,310 - INFO - Starting assembly process
+2025-07-20 16:50:55,310 - INFO - Assembly complete - Generated 22 bytes of machine code
+2025-07-20 16:50:55,322 - INFO - Assembly successful - 22 bytes loaded
+2025-07-20 16:51:10,177 - INFO - Starting code assembly
+2025-07-20 16:51:10,177 - INFO - Starting assembly process
+2025-07-20 16:51:10,177 - INFO - Assembly complete - Generated 22 bytes of machine code
+2025-07-20 16:51:10,189 - INFO - Assembly successful - 22 bytes loaded
+2025-07-20 16:51:16,140 - INFO - Starting program execution
+2025-07-20 16:51:20,183 - INFO - Program halted
