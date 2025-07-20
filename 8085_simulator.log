@@ -1938,3 +1938,57 @@
 2025-07-20 16:51:10,189 - INFO - Assembly successful - 22 bytes loaded
 2025-07-20 16:51:16,140 - INFO - Starting program execution
 2025-07-20 16:51:20,183 - INFO - Program halted
+2025-07-20 16:57:04,168 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:57:04,244 - INFO - Memory initialized with 64KB space
+2025-07-20 16:57:04,244 - INFO - CPU initialized
+2025-07-20 16:57:04,245 - INFO - CPU instruction set initialized
+2025-07-20 16:57:04,245 - INFO - Initializing 8085 Assembler
+2025-07-20 16:57:04,454 - INFO - GUI initialization complete
+2025-07-20 16:57:04,454 - INFO - Starting GUI main loop
+2025-07-20 16:58:47,510 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 16:58:47,591 - INFO - Memory initialized with 64KB space
+2025-07-20 16:58:47,591 - INFO - CPU initialized
+2025-07-20 16:58:47,592 - INFO - CPU instruction set initialized
+2025-07-20 16:58:47,592 - INFO - Initializing 8085 Assembler
+2025-07-20 16:58:47,732 - INFO - GUI initialization complete
+2025-07-20 16:58:47,732 - INFO - Starting GUI main loop
+2025-07-20 17:02:22,893 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 17:02:22,973 - INFO - Memory initialized with 64KB space
+2025-07-20 17:02:22,973 - INFO - CPU initialized
+2025-07-20 17:02:22,974 - INFO - CPU instruction set initialized
+2025-07-20 17:02:22,975 - INFO - Initializing 8085 Assembler
+2025-07-20 17:02:23,108 - INFO - GUI initialization complete
+2025-07-20 17:02:23,108 - INFO - Starting GUI main loop
+2025-07-20 17:02:36,554 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/multiplication_example.asm
+2025-07-20 17:02:41,400 - INFO - Starting code assembly
+2025-07-20 17:02:41,401 - INFO - Starting assembly process
+2025-07-20 17:02:41,401 - INFO - Assembly complete - Generated 21 bytes of machine code
+2025-07-20 17:02:41,412 - INFO - Assembly successful - 21 bytes loaded
+2025-07-20 17:06:24,913 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 17:06:24,994 - INFO - Memory initialized with 64KB space
+2025-07-20 17:06:24,995 - INFO - CPU initialized
+2025-07-20 17:06:24,995 - INFO - CPU instruction set initialized
+2025-07-20 17:06:24,995 - INFO - Initializing 8085 Assembler
+2025-07-20 17:06:25,129 - INFO - GUI initialization complete
+2025-07-20 17:06:25,129 - INFO - Starting GUI main loop
+2025-07-20 17:10:14,288 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 17:10:14,379 - INFO - Memory initialized with 64KB space
+2025-07-20 17:10:14,379 - INFO - CPU initialized
+2025-07-20 17:10:14,379 - INFO - CPU instruction set initialized
+2025-07-20 17:10:14,379 - INFO - Initializing 8085 Assembler
+2025-07-20 17:10:14,514 - INFO - GUI initialization complete
+2025-07-20 17:10:14,514 - INFO - Starting GUI main loop
+2025-07-20 17:10:48,185 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 17:10:48,268 - INFO - Memory initialized with 64KB space
+2025-07-20 17:10:48,268 - INFO - CPU initialized
+2025-07-20 17:10:48,268 - INFO - CPU instruction set initialized
+2025-07-20 17:10:48,268 - INFO - Initializing 8085 Assembler
+2025-07-20 17:10:48,401 - INFO - GUI initialization complete
+2025-07-20 17:10:48,401 - INFO - Starting GUI main loop
+2025-07-20 17:12:11,104 - INFO - Initializing 8085 Simulator GUI
+2025-07-20 17:12:11,183 - INFO - Memory initialized with 64KB space
+2025-07-20 17:12:11,183 - INFO - CPU initialized
+2025-07-20 17:12:11,184 - INFO - CPU instruction set initialized
+2025-07-20 17:12:11,184 - INFO - Initializing 8085 Assembler
+2025-07-20 17:12:11,323 - INFO - GUI initialization complete
+2025-07-20 17:12:11,323 - INFO - Starting GUI main loop
