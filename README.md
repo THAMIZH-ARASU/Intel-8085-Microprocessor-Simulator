@@ -1,6 +1,6 @@
 # Intel 8085 Microprocessor Simulator
 
-A Python-based simulator for the Intel 8085 microprocessor with a graphical user interface. This simulator allows you to write, assemble, and execute 8085 assembly code while visualizing the CPU state, memory contents, and program execution.
+A Python-based simulator for the Intel 8085 microprocessor with a graphical user interface. This simulator allows you to write, assemble, and execute 8085 assembly code while visualizing the CPU state, memory contents, and program execution. **Now with AI-powered code explanation!**
 
 > **Note:** This project is currently under active development. Features and functionality may change as development progresses.
 
@@ -13,7 +13,53 @@ A Python-based simulator for the Intel 8085 microprocessor with a graphical user
 - Step-by-step execution
 - Breakpoint support
 - File I/O for assembly code
+- **🤖 AI-Powered Code Explanation** - Get intelligent explanations of your assembly code
 - Comprehensive logging
+- **🌙 Dark/Light Theme Toggle** - Modern UI with theme switching
+
+## AI Code Explanation Feature
+
+The simulator now includes an intelligent AI-powered code explanation feature that helps you understand 8085 assembly code:
+
+### **🤖 How It Works**
+- Click the "🤖 Explain" button in the control panel
+- The AI analyzes your assembly code and provides detailed explanations
+- Get step-by-step breakdowns of each instruction
+- Learn about data flow, program purpose, and key concepts
+
+### **📚 What You Get**
+- **Program Overview**: Clear description of what the program does
+- **Instruction-by-Instruction Breakdown**: Detailed explanation of each instruction
+- **Key Concepts**: Important 8085 concepts demonstrated
+- **Educational Notes**: Learning insights and tips
+
+### **🔧 Setup Required**
+To use the AI explanation feature, you need a Groq API key:
+
+1. **Get API Key**: Sign up at [Groq Console](https://console.groq.com/)
+2. **Set Environment Variable**: Add to your `.env` file:
+   ```
+   GROQ_API_KEY=your_api_key_here
+   ```
+3. **Install Dependencies**: 
+   ```bash
+   pip install requests python-dotenv
+   ```
+
+### **💡 Example Usage**
+```assembly
+MVI A, #05      ; Load 05H into A
+MVI B, #03      ; Load 03H into B
+ADD B           ; A = A + B (A = 08H)
+STA #9000       ; Store result at 9000H
+HLT             ; Halt
+```
+
+The AI will explain:
+- What each instruction does
+- How data flows through registers
+- The overall purpose of the program
+- Important 8085 concepts used
 
 ## Output Screenshots
 
@@ -33,14 +79,16 @@ The simulator provides a visual interface with several key components:
 2. **Memory Viewer**: Shows the contents of memory locations in hexadecimal format
 3. **Register Display**: Shows the current state of all CPU registers (A, B, C, D, E, H, L, SP, PC)
 4. **Status Flags**: Displays the state of all CPU flags (S, Z, AC, P, C)
-5. **Control Panel**: Contains buttons for Run, Step, Stop, and Reset operations
+5. **Control Panel**: Contains buttons for Run, Step, Stop, Reset, Load/Save, and **🤖 Explain**
 6. **Terminal**: Shows all kinds of log about the system in real time
+7. **Theme Toggle**: Switch between dark and light modes for better user experience
 
 To view the output:
 1. Load or write your assembly code
 2. Click "Assemble" to compile the code
 3. Use the Run or Step buttons to execute the program
-4. The Memory Viewer and Register Display will update in real-time
+4. Click "🤖 Explain" to get AI-powered code explanation
+5. The Memory Viewer and Register Display will update in real-time
 
 ## Project Structure
 
@@ -59,7 +107,8 @@ Intel-8085-Microprocessor-Simulator
 │   │   └── SimulatorGUI.py
 │   └── Utils/
 │       ├── __init__.py
-│       └── Logger.py
+│       ├── Logger.py
+│       └── AIExplainer.py          # NEW: AI-powered code explanation
 ├── AssemblyPrograms/
 │   ├── addition_example.asm
 │   ├── subtraction_example.asm
@@ -67,6 +116,7 @@ Intel-8085-Microprocessor-Simulator
 │   ├── divide_example.asm
 │   └── More...
 ├── run.py
+├── INSTRUCTIONS.md                 # NEW: Complete instruction reference
 └── 8085_simulator.log
 ```
 
@@ -74,6 +124,8 @@ Intel-8085-Microprocessor-Simulator
 
 - Python 3.6 or higher
 - tkinter (usually comes with Python)
+- **requests** (for AI explanation feature)
+- **python-dotenv** (for environment variable management)
 
 ## Installation
 
@@ -83,7 +135,16 @@ git clone https://github.com/THAMIZH-ARASU/Intel-8085-Microprocessor-Simulator.g
 cd simple8085
 ```
 
-2. Run the simulator:
+2. Install required dependencies:
+```bash
+pip install requests python-dotenv
+```
+
+3. Set up your API key (optional, for AI explanation):
+   - Create a `.env` file in the project root
+   - Add: `GROQ_API_KEY=your_api_key_here`
+
+4. Run the simulator:
 ```bash
 python run.py
 ```
@@ -93,11 +154,34 @@ python run.py
 1. Write your 8085 assembly code in the code editor
 2. Click "Assemble" to convert the code to machine code
 3. Use the following controls to execute your program:
-   - Run: Execute the program continuously
-   - Step: Execute one instruction at a time
-   - Stop: Halt program execution
-   - Reset: Reset the CPU to initial state
-   - Load/Save: Load or save assembly code files
+   - **Run**: Execute the program continuously
+   - **Step**: Execute one instruction at a time
+   - **Stop**: Halt program execution
+   - **Reset**: Reset the CPU to initial state
+   - **Load/Save**: Load or save assembly code files
+   - **🤖 Explain**: Get AI-powered explanation of your code (requires API key)
+
+## AI Explanation Feature
+
+### **🎯 Getting Started**
+1. **Get API Key**: Sign up at [Groq Console](https://console.groq.com/)
+2. **Set Environment Variable**: Add to `.env` file:
+   ```
+   GROQ_API_KEY=your_api_key_here
+   ```
+3. **Use the Feature**: Click "🤖 Explain" button in the control panel
+
+### **📖 What You'll Get**
+- **Structured Explanations**: Clear sections with headers and bullet points
+- **Educational Focus**: Designed for learning 8085 assembly
+- **Step-by-Step Breakdown**: Each instruction explained in detail
+- **Concept Highlights**: Important 8085 concepts and techniques
+- **Learning Tips**: Educational insights for better understanding
+
+### **🔧 Troubleshooting**
+- **API Key Missing**: Ensure `GROQ_API_KEY` is set in your `.env` file
+- **Network Issues**: Check your internet connection
+- **Rate Limits**: Groq has rate limits; wait if you hit them
 
 ## Memory Editor
 
@@ -185,6 +269,8 @@ The GUI (`Src/Interface/SimulatorGUI.py`) provides a modern, user-friendly inter
   - Memory viewer and editor
   - Program execution controls
   - File I/O operations
+  - **🤖 AI Code Explanation** - Intelligent code analysis
+  - **🌙 Theme Toggle** - Dark/Light mode switching
 
 - **Implementation Details**:
   - Tkinter-based interface
@@ -192,6 +278,7 @@ The GUI (`Src/Interface/SimulatorGUI.py`) provides a modern, user-friendly inter
   - Real-time state updates
   - Memory visualization
   - Error handling and user feedback
+  - AI integration with threading support
 
 ### Utility Components
 
@@ -203,6 +290,22 @@ The Logger (`Src/Utils/Logger.py`) provides comprehensive logging:
   - Timestamp-based logging
   - Multiple log levels (INFO, DEBUG, ERROR)
   - Persistent log storage
+
+#### AI Explainer
+The AI Explainer (`Src/Utils/AIExplainer.py`) provides intelligent code analysis:
+
+- **Features**:
+  - Groq API integration for AI-powered explanations
+  - Structured, educational explanations
+  - Comprehensive error handling
+  - Connection testing and validation
+  - Detailed logging for troubleshooting
+
+- **Implementation Details**:
+  - Thread-safe API calls
+  - Structured prompt engineering
+  - Response formatting and validation
+  - Error categorization and user-friendly messages
 
 ### Potential Enhancements
 
@@ -227,7 +330,7 @@ The Logger (`Src/Utils/Logger.py`) provides comprehensive logging:
 
 #### Interface Enhancements
 1. **GUI Improvements**:
-   - Add dark/light theme support
+   - Add dark/light theme support ✅ **COMPLETED**
    - Implement code debugging features
    - Add memory visualization improvements
    - Support for multiple code views
@@ -239,6 +342,19 @@ The Logger (`Src/Utils/Logger.py`) provides comprehensive logging:
    - Add program execution history
    - Support for multiple breakpoints
    - Add program execution speed control
+
+#### AI Features
+1. **Enhanced Explanations**:
+   - Add visual diagrams for data flow
+   - Implement step-by-step animation
+   - Add code optimization suggestions
+   - Support for multiple explanation styles
+
+2. **Educational Tools**:
+   - Add interactive tutorials
+   - Implement learning progress tracking
+   - Add quiz generation from code
+   - Support for custom learning paths
 
 #### Utility Enhancements
 1. **Logging System**:
