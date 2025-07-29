@@ -37,13 +37,12 @@ The simulator now includes a comprehensive suite of AI-powered features to enhan
 
 ### **🚀 How to Use AI Features**
 
-#### **Method 1: Menu Bar**
-- Click on "AI Features" in the menu bar
-- Select any AI feature from the dropdown menu
-- Follow the prompts to provide additional information if needed
-
-#### **Method 2: Quick Access**
-- Use the "🤖 Explain" button in the control panel for quick code explanation
+#### **AI Tools Panel**
+- Click the "🤖 AI Tools" button in the control panel
+- This opens a comprehensive AI Tools Panel with all 11 AI features
+- Each tool has its own colored button with description
+- Simply click on any AI tool to use it
+- The panel includes status updates and scrollable interface
 
 ### **📋 Feature Details**
 
@@ -164,8 +163,8 @@ The simulator provides a visual interface with several key components:
 2. **Memory Viewer**: Shows the contents of memory locations in hexadecimal format
 3. **Register Display**: Shows the current state of all CPU registers (A, B, C, D, E, H, L, SP, PC)
 4. **Status Flags**: Displays the state of all CPU flags (S, Z, AC, P, C)
-5. **Control Panel**: Contains buttons for Run, Step, Stop, Reset, Load/Save, and **🤖 Explain**
-6. **AI Features Menu**: Access to all 11 AI-powered features
+5. **Control Panel**: Contains buttons for Run, Step, Stop, Reset, Load/Save, and **🤖 AI Tools**
+6. **AI Tools Panel**: Comprehensive interface with all 11 AI-powered features
 7. **Terminal**: Shows all kinds of log about the system in real time
 8. **Theme Toggle**: Switch between dark and light modes for better user experience
 
@@ -245,8 +244,7 @@ python run.py
    - **Stop**: Halt program execution
    - **Reset**: Reset the CPU to initial state
    - **Load/Save**: Load or save assembly code files
-   - **🤖 Explain**: Quick access to AI code explanation
-   - **AI Features Menu**: Access to all 11 AI features
+   - **🤖 AI Tools**: Opens comprehensive AI Tools Panel with all 11 features
 
 ## AI Features Usage Guide
 
@@ -256,7 +254,7 @@ python run.py
    ```
    GROQ_API_KEY=your_api_key_here
    ```
-3. **Use the Features**: Access via menu bar or quick access buttons
+3. **Use the Features**: Click "🤖 AI Tools" button to open the comprehensive AI Tools Panel
 
 ### **📖 What You'll Get from Each Feature**
 

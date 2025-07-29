@@ -108,24 +108,220 @@ class SimulatorGUI:
         logger.info("GUI initialization complete")
 
     def create_ai_menu(self):
-        """Create AI features menu"""
-        ai_menu = tk.Menu(self.menu_bar, tearoff=0)
+        """Create AI features menu - DEPRECATED, now using AI Tools Panel"""
+        # This method is kept for compatibility but not used
+        pass
+
+    def show_ai_tools_panel(self):
+        """Show the comprehensive AI tools panel"""
+        # Create AI tools window
+        ai_window = tk.Toplevel(self.root)
+        ai_window.title("🤖 AI Tools Panel")
+        ai_window.geometry("800x600")
+        ai_window.resizable(True, True)
         
-        # AI Features submenu
-        ai_menu.add_command(label="🤖 Explain Code", command=self.explain_code_with_ai)
-        ai_menu.add_command(label="⚡ Optimize Code", command=self.optimize_code_with_ai)
-        ai_menu.add_command(label="🐛 Debug Assistant", command=self.debug_with_ai)
-        ai_menu.add_command(label="📚 Generate Quiz", command=self.generate_quiz_with_ai)
-        ai_menu.add_command(label="📖 Create Documentation", command=self.document_with_ai)
-        ai_menu.add_separator()
-        ai_menu.add_command(label="🎯 Code Completion", command=self.complete_code_with_ai)
-        ai_menu.add_command(label="🔄 Translate Code", command=self.translate_with_ai)
-        ai_menu.add_command(label="📊 Performance Analysis", command=self.analyze_performance_with_ai)
-        ai_menu.add_command(label="🎓 Learning Path", command=self.generate_learning_path_with_ai)
-        ai_menu.add_command(label="🔧 Code Review", command=self.review_code_with_ai)
-        ai_menu.add_command(label="📈 Visualize Algorithm", command=self.visualize_algorithm_with_ai)
+        # Apply theme colors
+        theme = self.themes[self.current_theme]
+        ai_window.configure(bg=theme['bg_main'])
         
-        return ai_menu
+        # Create main frame
+        main_frame = tk.Frame(ai_window, bg=theme['bg_main'])
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=20)
+        
+        # Title
+        title_label = tk.Label(
+            main_frame,
+            text="🤖 AI-Powered 8085 Assembly Tools",
+            bg=theme['bg_main'],
+            fg=theme['fg_title'],
+            font=('Arial', 18, 'bold')
+        )
+        title_label.pack(pady=(0, 20))
+        
+        # Description
+        desc_label = tk.Label(
+            main_frame,
+            text="Select an AI tool to enhance your 8085 assembly programming experience:",
+            bg=theme['bg_main'],
+            fg=theme['fg_desc'],
+            font=('Arial', 12),
+            wraplength=700
+        )
+        desc_label.pack(pady=(0, 20))
+        
+        # Create scrollable frame for buttons
+        canvas = tk.Canvas(main_frame, bg=theme['bg_main'], highlightthickness=0)
+        scrollbar = tk.Scrollbar(main_frame, orient="vertical", command=canvas.yview)
+        scrollable_frame = tk.Frame(canvas, bg=theme['bg_main'])
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # AI Tools Grid Layout
+        ai_tools = [
+            {
+                'name': '📚 Code Explanation',
+                'description': 'Get intelligent explanations of your assembly code',
+                'command': self.explain_code_with_ai,
+                'color': '#9b59b6'
+            },
+            {
+                'name': '⚡ Code Optimization',
+                'description': 'Receive optimization suggestions and improvements',
+                'command': self.optimize_code_with_ai,
+                'color': '#e67e22'
+            },
+            {
+                'name': '🐛 Debug Assistant',
+                'description': 'AI-powered debugging help and error analysis',
+                'command': self.debug_with_ai,
+                'color': '#e74c3c'
+            },
+            {
+                'name': '📖 Documentation Generator',
+                'description': 'Create comprehensive documentation for your code',
+                'command': self.document_with_ai,
+                'color': '#3498db'
+            },
+            {
+                'name': '📝 Quiz Generator',
+                'description': 'Generate educational quizzes from your code',
+                'command': self.generate_quiz_with_ai,
+                'color': '#f39c12'
+            },
+            {
+                'name': '🎯 Code Completion',
+                'description': 'Get suggestions for next instructions',
+                'command': self.complete_code_with_ai,
+                'color': '#1abc9c'
+            },
+            {
+                'name': '🔄 Code Translation',
+                'description': 'Translate to other architectures',
+                'command': self.translate_with_ai,
+                'color': '#8e44ad'
+            },
+            {
+                'name': '📊 Performance Analysis',
+                'description': 'Analyze code performance and bottlenecks',
+                'command': self.analyze_performance_with_ai,
+                'color': '#2ecc71'
+            },
+            {
+                'name': '🎓 Learning Path Generator',
+                'description': 'Create personalized learning paths',
+                'command': self.generate_learning_path_with_ai,
+                'color': '#34495e'
+            },
+            {
+                'name': '🔧 Code Review',
+                'description': 'AI-powered code review and best practices',
+                'command': self.review_code_with_ai,
+                'color': '#e91e63'
+            },
+            {
+                'name': '📈 Algorithm Visualization',
+                'description': 'Visual descriptions of algorithms',
+                'command': self.visualize_algorithm_with_ai,
+                'color': '#607d8b'
+            }
+        ]
+        
+        # Create grid of AI tool buttons
+        row = 0
+        col = 0
+        max_cols = 2  # 2 columns for better layout
+        
+        for tool in ai_tools:
+            # Create frame for each tool
+            tool_frame = tk.Frame(scrollable_frame, bg=theme['bg_panel'], relief=tk.RAISED, bd=2)
+            tool_frame.grid(row=row, column=col, padx=10, pady=10, sticky='ew')
+            
+            # Tool button
+            tool_btn = tk.Button(
+                tool_frame,
+                text=tool['name'],
+                command=tool['command'],
+                bg=tool['color'],
+                fg='white',
+                font=('Arial', 12, 'bold'),
+                relief=tk.RAISED,
+                bd=2,
+                width=25,
+                height=2
+            )
+            tool_btn.pack(pady=(10, 5))
+            
+            # Tool description
+            desc_label = tk.Label(
+                tool_frame,
+                text=tool['description'],
+                bg=theme['bg_panel'],
+                fg=theme['fg_desc'],
+                font=('Arial', 10),
+                wraplength=300,
+                justify=tk.CENTER
+            )
+            desc_label.pack(pady=(0, 10))
+            
+            # Update grid position
+            col += 1
+            if col >= max_cols:
+                col = 0
+                row += 1
+        
+        # Configure grid weights
+        scrollable_frame.grid_columnconfigure(0, weight=1)
+        scrollable_frame.grid_columnconfigure(1, weight=1)
+        
+        # Pack canvas and scrollbar
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # Add status frame at bottom
+        status_frame = tk.Frame(main_frame, bg=theme['bg_main'])
+        status_frame.pack(fill=tk.X, pady=(20, 0))
+        
+        # Status label
+        self.ai_status_label = tk.Label(
+            status_frame,
+            text="Ready to use AI tools",
+            bg=theme['bg_main'],
+            fg=theme['fg_desc'],
+            font=('Arial', 11)
+        )
+        self.ai_status_label.pack(side=tk.LEFT)
+        
+        # Close button
+        close_btn = tk.Button(
+            status_frame,
+            text="Close",
+            command=ai_window.destroy,
+            bg=theme['btn_bg'],
+            fg=theme['btn_fg'],
+            font=('Arial', 11, 'bold'),
+            relief=tk.RAISED,
+            bd=2
+        )
+        close_btn.pack(side=tk.RIGHT)
+        
+        # Bind mouse wheel to scroll
+        def _on_mousewheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        
+        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+        
+        # Unbind when window closes
+        def on_closing():
+            canvas.unbind_all("<MouseWheel>")
+            ai_window.destroy()
+        
+        ai_window.protocol("WM_DELETE_WINDOW", on_closing)
 
     def explain_code_with_ai(self):
         """Explain the assembly code using AI"""
@@ -231,6 +427,10 @@ class SimulatorGUI:
             if not params.get('code', '').strip() and feature not in ['learn']:
                 return
             
+            # Update status if AI tools panel is open
+            if hasattr(self, 'ai_status_label'):
+                self.ai_status_label.config(text=f"Executing {feature} with AI...")
+            
             self.status_bar.config(text=f"Executing {feature} with AI...")
             
             def api_call():
@@ -241,6 +441,8 @@ class SimulatorGUI:
                         # Show the result in a new window
                         self.root.after(0, lambda: self._show_ai_result(feature, result))
                         self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} completed"))
+                        if hasattr(self, 'ai_status_label'):
+                            self.root.after(0, lambda: self.ai_status_label.config(text=f"{feature.title()} completed"))
                     else:
                         # Handle different error types
                         error_message = result.get('message', 'Unknown error')
@@ -252,10 +454,14 @@ class SimulatorGUI:
                         
                         self.root.after(0, lambda: messagebox.showerror(f"AI {feature.title()} Error", error_message))
                         self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} failed"))
+                        if hasattr(self, 'ai_status_label'):
+                            self.root.after(0, lambda: self.ai_status_label.config(text=f"{feature.title()} failed"))
                         
                 except Exception as e:
                     self.root.after(0, lambda: messagebox.showerror("Error", f"Unexpected error: {str(e)}"))
                     self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} failed"))
+                    if hasattr(self, 'ai_status_label'):
+                        self.root.after(0, lambda: self.ai_status_label.config(text=f"{feature.title()} failed"))
             
             threading.Thread(target=api_call, daemon=True).start()
             
@@ -263,6 +469,8 @@ class SimulatorGUI:
             logger.error(f"Error in {feature}: {str(e)}")
             messagebox.showerror("Error", f"Failed to execute {feature}: {str(e)}")
             self.status_bar.config(text=f"{feature.title()} failed")
+            if hasattr(self, 'ai_status_label'):
+                self.ai_status_label.config(text=f"{feature.title()} failed")
 
     def _show_ai_result(self, feature: str, result: Dict[str, Any]):
         """Show AI result in a new window"""
@@ -398,10 +606,6 @@ class SimulatorGUI:
         file_menu.add_command(label="Exit", command=self.root.quit)
         self.menu_bar.add_cascade(label="File", menu=file_menu)
         
-        # AI menu
-        ai_menu = self.create_ai_menu()
-        self.menu_bar.add_cascade(label="AI Features", menu=ai_menu)
-        
         # Main frame
         self.main_frame = tk.Frame(self.root, bg=theme['bg_main'])
         self.main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -478,8 +682,8 @@ class SimulatorGUI:
         tk.Button(control_frame, text="Load .asm", command=self.load_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Save .asm", command=self.save_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
-        # Add AI Explain button (quick access)
-        tk.Button(control_frame, text="🤖 Explain", command=self.explain_code_with_ai, bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
+        # Add AI Tools button (replaces the old Explain button)
+        tk.Button(control_frame, text="🤖 AI Tools", command=self.show_ai_tools_panel, bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
         # Right panel - CPU state and memory
         right_panel = tk.Frame(self.main_frame, bg=theme['bg_panel'])
@@ -843,7 +1047,7 @@ class SimulatorGUI:
                                     subsub.configure(bg=theme['btn2_bg'], fg=theme['btn2_fg'])
                                 elif text == 'Read':
                                     subsub.configure(bg=theme['btn3_bg'], fg=theme['btn3_fg'])
-                                elif text == '🤖 Explain':
+                                elif text == '🤖 AI Tools':
                                     subsub.configure(bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'])
                                 else:
                                     subsub.configure(bg=theme['btn_bg'], fg=theme['btn_fg'])
@@ -865,7 +1069,7 @@ class SimulatorGUI:
                             btn.configure(bg=theme['btn2_bg'], fg=theme['btn2_fg'])
                         elif text == 'Read':
                             btn.configure(bg=theme['btn3_bg'], fg=theme['btn3_fg'])
-                        elif text == '🤖 Explain':
+                        elif text == '🤖 AI Tools':
                             btn.configure(bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'])
                         else:
                             btn.configure(bg=theme['btn_bg'], fg=theme['btn_fg'])
