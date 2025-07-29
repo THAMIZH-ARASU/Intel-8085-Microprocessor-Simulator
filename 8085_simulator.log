@@ -2012,3 +2012,57 @@
 2025-07-20 17:15:09,706 - INFO - Wrote value 03 to address 8051
 2025-07-20 17:15:11,747 - INFO - Starting program execution
 2025-07-20 17:15:13,483 - INFO - Program halted
+2025-07-21 16:00:29,470 - INFO - Initializing 8085 Simulator GUI
+2025-07-21 16:00:29,733 - INFO - Memory initialized with 64KB space
+2025-07-21 16:00:29,733 - INFO - CPU initialized
+2025-07-21 16:00:29,734 - INFO - CPU instruction set initialized
+2025-07-21 16:00:29,734 - INFO - Initializing 8085 Assembler
+2025-07-21 16:00:30,194 - INFO - GUI initialization complete
+2025-07-21 16:00:30,194 - INFO - Starting GUI main loop
+2025-07-21 16:01:56,902 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/multiplication_example.asm
+2025-07-21 16:02:06,957 - INFO - Wrote value 05 to address 9000
+2025-07-21 16:02:53,962 - INFO - Wrote value 03 to address 9001
+2025-07-21 16:03:47,361 - INFO - Starting code assembly
+2025-07-21 16:03:47,362 - INFO - Starting assembly process
+2025-07-21 16:03:47,363 - INFO - Assembly complete - Generated 21 bytes of machine code
+2025-07-21 16:03:47,386 - INFO - Assembly successful - 21 bytes loaded
+2025-07-21 16:06:53,418 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:53,629 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:53,779 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:53,978 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:54,187 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:54,380 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:54,540 - INFO - Attempted step while CPU halted
+2025-07-21 16:06:55,433 - INFO - Attempted step while CPU halted
+2025-07-29 21:08:50,089 - INFO - Initializing 8085 Simulator GUI
+2025-07-29 21:08:50,239 - INFO - Memory initialized with 64KB space
+2025-07-29 21:08:50,240 - INFO - CPU initialized
+2025-07-29 21:08:50,240 - INFO - CPU instruction set initialized
+2025-07-29 21:08:50,240 - INFO - Initializing 8085 Assembler
+2025-07-29 21:08:50,873 - INFO - GUI initialization complete
+2025-07-29 21:08:50,873 - INFO - Starting GUI main loop
+2025-07-29 21:10:15,640 - INFO - Initializing 8085 Simulator GUI
+2025-07-29 21:10:15,727 - INFO - Memory initialized with 64KB space
+2025-07-29 21:10:15,728 - INFO - CPU initialized
+2025-07-29 21:10:15,728 - INFO - CPU instruction set initialized
+2025-07-29 21:10:15,728 - INFO - Initializing 8085 Assembler
+2025-07-29 21:10:16,113 - INFO - GUI initialization complete
+2025-07-29 21:10:16,113 - INFO - Starting GUI main loop
+2025-07-29 21:10:29,726 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/addition_example.asm
+2025-07-29 21:10:54,870 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/bubble_sort.asm
+2025-07-29 21:15:28,097 - INFO - Initializing 8085 Simulator GUI
+2025-07-29 21:15:28,184 - INFO - Initializing AI Explainer
+2025-07-29 21:15:28,185 - INFO - API key found in environment variables
+2025-07-29 21:15:28,185 - INFO - Memory initialized with 64KB space
+2025-07-29 21:15:28,186 - INFO - CPU initialized
+2025-07-29 21:15:28,186 - INFO - CPU instruction set initialized
+2025-07-29 21:15:28,186 - INFO - Initializing 8085 Assembler
+2025-07-29 21:15:28,584 - INFO - GUI initialization complete
+2025-07-29 21:15:28,584 - INFO - Starting GUI main loop
+2025-07-29 21:15:39,830 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/fibonacci.asm
+2025-07-29 21:15:42,404 - INFO - Starting AI code explanation
+2025-07-29 21:15:42,404 - INFO - Preparing API request to Groq
+2025-07-29 21:15:46,300 - INFO - AI explanation completed successfully
+2025-07-29 21:16:57,153 - INFO - Starting AI code explanation
+2025-07-29 21:16:57,153 - INFO - Preparing API request to Groq
+2025-07-29 21:17:02,351 - INFO - AI explanation completed successfully

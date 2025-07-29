@@ -2,11 +2,17 @@ import tkinter as tk
 from tkinter import scrolledtext, messagebox, filedialog
 import threading
 import time
+import os
+from dotenv import load_dotenv
 
 from Src.Core.Memory import Memory
 from Src.Core.CPU import CPU
 from Src.Core.Assembler import Assembler
 from Src.Utils.Logger import logger
+from Src.Utils.AIExplainer import AIExplainer
+
+# Load environment variables
+load_dotenv()
 
 class SimulatorGUI:
     """8085 Simulator GUI Interface"""
@@ -16,6 +22,9 @@ class SimulatorGUI:
         self.root = tk.Tk()
         self.root.title("Intel 8085 Microprocessor Simulator")
         self.root.geometry("1400x900")  # Increased window size
+
+        # Initialize AI Explainer
+        self.ai_explainer = AIExplainer()
 
         # Color themes
         self.themes = {
@@ -37,6 +46,8 @@ class SimulatorGUI:
                 'btn3_fg': '#181c2f',
                 'btn_stop_bg': '#ff595e',
                 'btn_stop_fg': '#fff',
+                'btn_explain_bg': '#9b59b6',
+                'btn_explain_fg': '#fff',
                 'status_bg': '#181c2f',
                 'status_fg': '#f6c177',
                 'entry_bg': '#232946',
@@ -63,6 +74,8 @@ class SimulatorGUI:
                 'btn3_fg': '#232946',
                 'btn_stop_bg': '#e63946',
                 'btn_stop_fg': '#fff',
+                'btn_explain_bg': '#9b59b6',
+                'btn_explain_fg': '#fff',
                 'status_bg': '#e0e1dd',
                 'status_fg': '#3d5a80',
                 'entry_bg': '#e0e1dd',
@@ -88,7 +101,149 @@ class SimulatorGUI:
         self.create_widgets()
         self.update_display()
         logger.info("GUI initialization complete")
-    
+
+    def explain_code_with_ai(self):
+        """Explain the assembly code using AI Explainer"""
+        try:
+            # Get the code from the editor
+            code = self.code_text.get('1.0', tk.END).strip()
+            if not code:
+                messagebox.showwarning("No Code", "Please enter some assembly code to explain.")
+                return
+            
+            self.status_bar.config(text="Explaining code with AI...")
+            
+            # Make the API call in a separate thread to avoid blocking the UI
+            def api_call():
+                try:
+                    result = self.ai_explainer.explain_code(code)
+                    
+                    if result['success']:
+                        # Show the explanation in a new window
+                        self.root.after(0, lambda: self.show_explanation(result['explanation']))
+                        self.root.after(0, lambda: self.status_bar.config(text="Code explanation completed"))
+                    else:
+                        # Handle different error types
+                        error_message = result['message']
+                        if result['error'] == 'API_KEY_MISSING':
+                            error_message = (
+                                "GROQ_API_KEY not found in environment variables.\n"
+                                "Please set GROQ_API_KEY in your .env file or environment variables."
+                            )
+                        
+                        self.root.after(0, lambda: messagebox.showerror("AI Explanation Error", error_message))
+                        self.root.after(0, lambda: self.status_bar.config(text="Explanation failed"))
+                        
+                except Exception as e:
+                    self.root.after(0, lambda: messagebox.showerror("Error", f"Unexpected error: {str(e)}"))
+                    self.root.after(0, lambda: self.status_bar.config(text="Explanation failed"))
+            
+            threading.Thread(target=api_call, daemon=True).start()
+            
+        except Exception as e:
+            logger.error(f"Error in explain_code_with_ai: {str(e)}")
+            messagebox.showerror("Error", f"Failed to explain code: {str(e)}")
+            self.status_bar.config(text="Explanation failed")
+
+    def show_explanation(self, explanation):
+        """Show the AI explanation in a new window with improved formatting"""
+        explanation_window = tk.Toplevel(self.root)
+        explanation_window.title("AI Code Explanation")
+        explanation_window.geometry("900x700")
+        
+        # Apply theme colors
+        theme = self.themes[self.current_theme]
+        explanation_window.configure(bg=theme['bg_main'])
+        
+        # Create main frame
+        main_frame = tk.Frame(explanation_window, bg=theme['bg_main'])
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        # Title
+        title_label = tk.Label(
+            main_frame,
+            text="🤖 AI Code Explanation",
+            bg=theme['bg_main'],
+            fg=theme['fg_title'],
+            font=('Arial', 16, 'bold')
+        )
+        title_label.pack(pady=(0, 10))
+        
+        # Create text widget for explanation with better formatting
+        explanation_text = scrolledtext.ScrolledText(
+            main_frame,
+            wrap=tk.WORD,
+            bg=theme['bg_code'],
+            fg=theme['fg_main'],
+            font=('Consolas', 11),
+            padx=15,
+            pady=15,
+            spacing1=2,  # Space before paragraphs
+            spacing2=1,  # Space between lines
+            spacing3=2   # Space after paragraphs
+        )
+        explanation_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        
+        # Format the explanation for better display
+        formatted_explanation = self._format_explanation_for_display(explanation)
+        
+        # Insert the explanation
+        explanation_text.insert('1.0', formatted_explanation)
+        explanation_text.config(state=tk.DISABLED)
+        
+        # Button frame
+        button_frame = tk.Frame(main_frame, bg=theme['bg_main'])
+        button_frame.pack(pady=10)
+        
+        # Add close button
+        close_btn = tk.Button(
+            button_frame,
+            text="Close",
+            command=explanation_window.destroy,
+            bg=theme['btn_bg'],
+            fg=theme['btn_fg'],
+            font=('Arial', 11, 'bold'),
+            relief=tk.RAISED,
+            bd=2
+        )
+        close_btn.pack(side=tk.LEFT, padx=5)
+        
+        # Add copy button
+        copy_btn = tk.Button(
+            button_frame,
+            text="Copy to Clipboard",
+            command=lambda: self._copy_to_clipboard(formatted_explanation),
+            bg=theme['btn2_bg'],
+            fg=theme['btn2_fg'],
+            font=('Arial', 11, 'bold'),
+            relief=tk.RAISED,
+            bd=2
+        )
+        copy_btn.pack(side=tk.LEFT, padx=5)
+
+    def _format_explanation_for_display(self, explanation):
+        """Format the explanation for better display in the text widget"""
+        # Convert markdown-style formatting to plain text with better structure
+        formatted = explanation
+        
+        # Replace markdown bold with plain text emphasis
+        formatted = formatted.replace('**', '')
+        
+        # Add spacing around section headers
+        formatted = formatted.replace('\n**', '\n\n**')
+        
+        # Ensure proper spacing
+        formatted = formatted.replace('\n\n\n', '\n\n')
+        
+        return formatted
+
+    def _copy_to_clipboard(self, text):
+        """Copy text to clipboard"""
+        self.root.clipboard_clear()
+        self.root.clipboard_append(text)
+        self.root.update()  # Required for some systems
+        messagebox.showinfo("Copied", "Explanation copied to clipboard!")
+
     def create_widgets(self):
         """Create and layout GUI widgets"""
         theme = self.themes[self.current_theme]
@@ -111,7 +266,7 @@ class SimulatorGUI:
             bg=theme['btn_bg'], fg=theme['btn_fg'], font=('Arial', 11, 'bold'), relief=tk.RAISED, bd=2
         )
         self.theme_btn.pack(side=tk.RIGHT, padx=10, pady=5)
-
+        
         # Left panel - Code editor and controls
         self.left_panel = tk.Frame(self.main_frame, bg=theme['bg_panel'], relief=tk.RAISED, bd=2)
         self.left_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 5))
@@ -168,6 +323,9 @@ class SimulatorGUI:
         tk.Button(control_frame, text="Load .asm", command=self.load_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Save .asm", command=self.save_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
+        # Add AI Explain button
+        tk.Button(control_frame, text="🤖 Explain", command=self.explain_code_with_ai, bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
+        
         # Right panel - CPU state and memory
         right_panel = tk.Frame(self.main_frame, bg=theme['bg_panel'])
         right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=(5, 0))
@@ -220,7 +378,7 @@ class SimulatorGUI:
             frame = tk.Frame(flags_grid, bg=theme['bg_panel'])
             frame.grid(row=i//3, column=i%3, padx=5, pady=2, sticky='w')
             
-            tk.Label(frame, text=f"{flag}:", bg=theme['bg_panel'], fg=theme['fg_label'], font=('Consolas', 12, 'bold')).pack(side=tk.LEFT)
+            tk.Label(frame, text=f"{flag}:", bg=theme['bg_panel'], fg=theme['fg_label'], font=('Consolas', 11, 'bold')).pack(side=tk.LEFT)
             self.flag_labels[flag] = tk.Label(frame, text="0", bg='#181c2f', fg=theme['fg_flag'], font=('Consolas', 12, 'bold'), width=2)
             self.flag_labels[flag].pack(side=tk.LEFT, padx=2)
         
@@ -263,7 +421,7 @@ class SimulatorGUI:
             anchor=tk.W
         )
         self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
-    
+
     def assemble_code(self):
         """Assemble the code in the editor"""
         try:
@@ -530,6 +688,8 @@ class SimulatorGUI:
                                     subsub.configure(bg=theme['btn2_bg'], fg=theme['btn2_fg'])
                                 elif text == 'Read':
                                     subsub.configure(bg=theme['btn3_bg'], fg=theme['btn3_fg'])
+                                elif text == '🤖 Explain':
+                                    subsub.configure(bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'])
                                 else:
                                     subsub.configure(bg=theme['btn_bg'], fg=theme['btn_fg'])
                     elif isinstance(sub, tk.Label):
@@ -550,6 +710,8 @@ class SimulatorGUI:
                             btn.configure(bg=theme['btn2_bg'], fg=theme['btn2_fg'])
                         elif text == 'Read':
                             btn.configure(bg=theme['btn3_bg'], fg=theme['btn3_fg'])
+                        elif text == '🤖 Explain':
+                            btn.configure(bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'])
                         else:
                             btn.configure(bg=theme['btn_bg'], fg=theme['btn_fg'])
                     elif isinstance(btn, tk.Label):
