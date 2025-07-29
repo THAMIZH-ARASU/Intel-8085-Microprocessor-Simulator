@@ -1,15 +1,16 @@
 import tkinter as tk
-from tkinter import scrolledtext, messagebox, filedialog
+from tkinter import scrolledtext, messagebox, filedialog, ttk, simpledialog
 import threading
 import time
 import os
 from dotenv import load_dotenv
+from typing import Tuple, List, Dict, Any
 
 from Src.Core.Memory import Memory
 from Src.Core.CPU import CPU
 from Src.Core.Assembler import Assembler
 from Src.Utils.Logger import logger
-from Src.Utils.AIExplainer import AIExplainer
+from Src.Utils.AIFeatures import AIFeatures
 
 # Load environment variables
 load_dotenv()
@@ -23,8 +24,8 @@ class SimulatorGUI:
         self.root.title("Intel 8085 Microprocessor Simulator")
         self.root.geometry("1400x900")  # Increased window size
 
-        # Initialize AI Explainer
-        self.ai_explainer = AIExplainer()
+        # Initialize AI Features
+        self.ai_features = AIFeatures()
 
         # Color themes
         self.themes = {
@@ -48,6 +49,8 @@ class SimulatorGUI:
                 'btn_stop_fg': '#fff',
                 'btn_explain_bg': '#9b59b6',
                 'btn_explain_fg': '#fff',
+                'btn_ai_bg': '#8e44ad',
+                'btn_ai_fg': '#fff',
                 'status_bg': '#181c2f',
                 'status_fg': '#f6c177',
                 'entry_bg': '#232946',
@@ -76,6 +79,8 @@ class SimulatorGUI:
                 'btn_stop_fg': '#fff',
                 'btn_explain_bg': '#9b59b6',
                 'btn_explain_fg': '#fff',
+                'btn_ai_bg': '#8e44ad',
+                'btn_ai_fg': '#fff',
                 'status_bg': '#e0e1dd',
                 'status_fg': '#3d5a80',
                 'entry_bg': '#e0e1dd',
@@ -102,75 +107,208 @@ class SimulatorGUI:
         self.update_display()
         logger.info("GUI initialization complete")
 
+    def create_ai_menu(self):
+        """Create AI features menu"""
+        ai_menu = tk.Menu(self.menu_bar, tearoff=0)
+        
+        # AI Features submenu
+        ai_menu.add_command(label="🤖 Explain Code", command=self.explain_code_with_ai)
+        ai_menu.add_command(label="⚡ Optimize Code", command=self.optimize_code_with_ai)
+        ai_menu.add_command(label="🐛 Debug Assistant", command=self.debug_with_ai)
+        ai_menu.add_command(label="📚 Generate Quiz", command=self.generate_quiz_with_ai)
+        ai_menu.add_command(label="📖 Create Documentation", command=self.document_with_ai)
+        ai_menu.add_separator()
+        ai_menu.add_command(label="🎯 Code Completion", command=self.complete_code_with_ai)
+        ai_menu.add_command(label="🔄 Translate Code", command=self.translate_with_ai)
+        ai_menu.add_command(label="📊 Performance Analysis", command=self.analyze_performance_with_ai)
+        ai_menu.add_command(label="🎓 Learning Path", command=self.generate_learning_path_with_ai)
+        ai_menu.add_command(label="🔧 Code Review", command=self.review_code_with_ai)
+        ai_menu.add_command(label="📈 Visualize Algorithm", command=self.visualize_algorithm_with_ai)
+        
+        return ai_menu
+
     def explain_code_with_ai(self):
-        """Explain the assembly code using AI Explainer"""
+        """Explain the assembly code using AI"""
+        self._execute_ai_feature('explain', {'code': self._get_code_from_editor()})
+
+    def optimize_code_with_ai(self):
+        """Optimize the assembly code using AI"""
+        self._execute_ai_feature('optimize', {'code': self._get_code_from_editor()})
+
+    def debug_with_ai(self):
+        """Debug the assembly code using AI"""
+        error_msg = self._get_error_input()
+        self._execute_ai_feature('debug', {
+            'code': self._get_code_from_editor(),
+            'error_message': error_msg
+        })
+
+    def generate_quiz_with_ai(self):
+        """Generate quiz from the assembly code using AI"""
+        difficulty = self._get_difficulty_input()
+        self._execute_ai_feature('quiz', {
+            'code': self._get_code_from_editor(),
+            'difficulty': difficulty
+        })
+
+    def document_with_ai(self):
+        """Generate documentation for the assembly code using AI"""
+        self._execute_ai_feature('document', {'code': self._get_code_from_editor()})
+
+    def complete_code_with_ai(self):
+        """Get code completion suggestions using AI"""
+        context = self._get_context_input()
+        self._execute_ai_feature('complete', {
+            'code': self._get_code_from_editor(),
+            'context': context
+        })
+
+    def translate_with_ai(self):
+        """Translate code to other architecture using AI"""
+        target_arch = self._get_target_architecture_input()
+        self._execute_ai_feature('translate', {
+            'code': self._get_code_from_editor(),
+            'target_architecture': target_arch
+        })
+
+    def analyze_performance_with_ai(self):
+        """Analyze performance of the assembly code using AI"""
+        self._execute_ai_feature('analyze', {'code': self._get_code_from_editor()})
+
+    def generate_learning_path_with_ai(self):
+        """Generate learning path using AI"""
+        user_level, topics = self._get_learning_path_input()
+        self._execute_ai_feature('learn', {
+            'user_level': user_level,
+            'topics': topics
+        })
+
+    def review_code_with_ai(self):
+        """Review the assembly code using AI"""
+        self._execute_ai_feature('review', {'code': self._get_code_from_editor()})
+
+    def visualize_algorithm_with_ai(self):
+        """Visualize algorithm using AI"""
+        self._execute_ai_feature('visualize', {'code': self._get_code_from_editor()})
+
+    def _get_code_from_editor(self) -> str:
+        """Get code from the editor"""
+        code = self.code_text.get('1.0', tk.END).strip()
+        if not code:
+            messagebox.showwarning("No Code", "Please enter some assembly code first.")
+            return ""
+        return code
+
+    def _get_error_input(self) -> str:
+        """Get error message input from user"""
+        return tk.simpledialog.askstring("Debug Assistant", "Enter error message (optional):") or ""
+
+    def _get_difficulty_input(self) -> str:
+        """Get difficulty level input from user"""
+        difficulty = tk.simpledialog.askstring("Quiz Generator", "Enter difficulty (beginner/intermediate/advanced):", initialvalue="intermediate")
+        return difficulty or "intermediate"
+
+    def _get_context_input(self) -> str:
+        """Get context input for code completion"""
+        return tk.simpledialog.askstring("Code Completion", "Enter context (optional):") or ""
+
+    def _get_target_architecture_input(self) -> str:
+        """Get target architecture input"""
+        architectures = ["x86", "ARM", "MIPS", "Z80", "6502"]
+        arch = tk.simpledialog.askstring("Code Translation", f"Enter target architecture ({', '.join(architectures)}):", initialvalue="x86")
+        return arch or "x86"
+
+    def _get_learning_path_input(self) -> Tuple[str, List[str]]:
+        """Get learning path input from user"""
+        user_level = tk.simpledialog.askstring("Learning Path", "Enter your level (beginner/intermediate/advanced):", initialvalue="beginner") or "beginner"
+        topics_input = tk.simpledialog.askstring("Learning Path", "Enter topics (comma-separated):", initialvalue="data transfer, arithmetic, branching") or "data transfer"
+        topics = [topic.strip() for topic in topics_input.split(",")]
+        return user_level, topics
+
+    def _execute_ai_feature(self, feature: str, params: Dict[str, Any]):
+        """Execute AI feature with parameters"""
         try:
-            # Get the code from the editor
-            code = self.code_text.get('1.0', tk.END).strip()
-            if not code:
-                messagebox.showwarning("No Code", "Please enter some assembly code to explain.")
+            if not params.get('code', '').strip() and feature not in ['learn']:
                 return
             
-            self.status_bar.config(text="Explaining code with AI...")
+            self.status_bar.config(text=f"Executing {feature} with AI...")
             
-            # Make the API call in a separate thread to avoid blocking the UI
             def api_call():
                 try:
-                    result = self.ai_explainer.explain_code(code)
+                    result = self.ai_features.execute_feature(feature, **params)
                     
                     if result['success']:
-                        # Show the explanation in a new window
-                        self.root.after(0, lambda: self.show_explanation(result['explanation']))
-                        self.root.after(0, lambda: self.status_bar.config(text="Code explanation completed"))
+                        # Show the result in a new window
+                        self.root.after(0, lambda: self._show_ai_result(feature, result))
+                        self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} completed"))
                     else:
                         # Handle different error types
-                        error_message = result['message']
-                        if result['error'] == 'API_KEY_MISSING':
+                        error_message = result.get('message', 'Unknown error')
+                        if result.get('error') == 'API_KEY_MISSING':
                             error_message = (
                                 "GROQ_API_KEY not found in environment variables.\n"
                                 "Please set GROQ_API_KEY in your .env file or environment variables."
                             )
                         
-                        self.root.after(0, lambda: messagebox.showerror("AI Explanation Error", error_message))
-                        self.root.after(0, lambda: self.status_bar.config(text="Explanation failed"))
+                        self.root.after(0, lambda: messagebox.showerror(f"AI {feature.title()} Error", error_message))
+                        self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} failed"))
                         
                 except Exception as e:
                     self.root.after(0, lambda: messagebox.showerror("Error", f"Unexpected error: {str(e)}"))
-                    self.root.after(0, lambda: self.status_bar.config(text="Explanation failed"))
+                    self.root.after(0, lambda: self.status_bar.config(text=f"{feature.title()} failed"))
             
             threading.Thread(target=api_call, daemon=True).start()
             
         except Exception as e:
-            logger.error(f"Error in explain_code_with_ai: {str(e)}")
-            messagebox.showerror("Error", f"Failed to explain code: {str(e)}")
-            self.status_bar.config(text="Explanation failed")
+            logger.error(f"Error in {feature}: {str(e)}")
+            messagebox.showerror("Error", f"Failed to execute {feature}: {str(e)}")
+            self.status_bar.config(text=f"{feature.title()} failed")
 
-    def show_explanation(self, explanation):
-        """Show the AI explanation in a new window with improved formatting"""
-        explanation_window = tk.Toplevel(self.root)
-        explanation_window.title("AI Code Explanation")
-        explanation_window.geometry("900x700")
+    def _show_ai_result(self, feature: str, result: Dict[str, Any]):
+        """Show AI result in a new window"""
+        # Determine the content to show based on feature
+        content_key_map = {
+            'explain': 'explanation',
+            'optimize': 'optimizations',
+            'debug': 'debug_analysis',
+            'document': 'documentation',
+            'quiz': 'quiz',
+            'complete': 'suggestions',
+            'translate': 'translation',
+            'analyze': 'performance_analysis',
+            'learn': 'learning_path',
+            'review': 'review',
+            'visualize': 'visualization'
+        }
+        
+        content_key = content_key_map.get(feature, 'data')
+        content = result.get(content_key, result.get('data', 'No content available'))
+        
+        # Create window
+        window = tk.Toplevel(self.root)
+        window.title(f"AI {feature.title()} Result")
+        window.geometry("900x700")
         
         # Apply theme colors
         theme = self.themes[self.current_theme]
-        explanation_window.configure(bg=theme['bg_main'])
+        window.configure(bg=theme['bg_main'])
         
         # Create main frame
-        main_frame = tk.Frame(explanation_window, bg=theme['bg_main'])
+        main_frame = tk.Frame(window, bg=theme['bg_main'])
         main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Title
         title_label = tk.Label(
             main_frame,
-            text="🤖 AI Code Explanation",
+            text=f"🤖 AI {feature.title()} Result",
             bg=theme['bg_main'],
             fg=theme['fg_title'],
             font=('Arial', 16, 'bold')
         )
         title_label.pack(pady=(0, 10))
         
-        # Create text widget for explanation with better formatting
-        explanation_text = scrolledtext.ScrolledText(
+        # Create text widget for content
+        content_text = scrolledtext.ScrolledText(
             main_frame,
             wrap=tk.WORD,
             bg=theme['bg_code'],
@@ -178,18 +316,18 @@ class SimulatorGUI:
             font=('Consolas', 11),
             padx=15,
             pady=15,
-            spacing1=2,  # Space before paragraphs
-            spacing2=1,  # Space between lines
-            spacing3=2   # Space after paragraphs
+            spacing1=2,
+            spacing2=1,
+            spacing3=2
         )
-        explanation_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
+        content_text.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         
-        # Format the explanation for better display
-        formatted_explanation = self._format_explanation_for_display(explanation)
+        # Format the content for better display
+        formatted_content = self._format_content_for_display(content)
         
-        # Insert the explanation
-        explanation_text.insert('1.0', formatted_explanation)
-        explanation_text.config(state=tk.DISABLED)
+        # Insert the content
+        content_text.insert('1.0', formatted_content)
+        content_text.config(state=tk.DISABLED)
         
         # Button frame
         button_frame = tk.Frame(main_frame, bg=theme['bg_main'])
@@ -199,7 +337,7 @@ class SimulatorGUI:
         close_btn = tk.Button(
             button_frame,
             text="Close",
-            command=explanation_window.destroy,
+            command=window.destroy,
             bg=theme['btn_bg'],
             fg=theme['btn_fg'],
             font=('Arial', 11, 'bold'),
@@ -212,7 +350,7 @@ class SimulatorGUI:
         copy_btn = tk.Button(
             button_frame,
             text="Copy to Clipboard",
-            command=lambda: self._copy_to_clipboard(formatted_explanation),
+            command=lambda: self._copy_to_clipboard(formatted_content),
             bg=theme['btn2_bg'],
             fg=theme['btn2_fg'],
             font=('Arial', 11, 'bold'),
@@ -221,10 +359,10 @@ class SimulatorGUI:
         )
         copy_btn.pack(side=tk.LEFT, padx=5)
 
-    def _format_explanation_for_display(self, explanation):
-        """Format the explanation for better display in the text widget"""
+    def _format_content_for_display(self, content: str) -> str:
+        """Format the content for better display in the text widget"""
         # Convert markdown-style formatting to plain text with better structure
-        formatted = explanation
+        formatted = content
         
         # Replace markdown bold with plain text emphasis
         formatted = formatted.replace('**', '')
@@ -237,16 +375,33 @@ class SimulatorGUI:
         
         return formatted
 
-    def _copy_to_clipboard(self, text):
+    def _copy_to_clipboard(self, text: str):
         """Copy text to clipboard"""
         self.root.clipboard_clear()
         self.root.clipboard_append(text)
         self.root.update()  # Required for some systems
-        messagebox.showinfo("Copied", "Explanation copied to clipboard!")
+        messagebox.showinfo("Copied", "Content copied to clipboard!")
 
     def create_widgets(self):
         """Create and layout GUI widgets"""
         theme = self.themes[self.current_theme]
+        
+        # Create menu bar
+        self.menu_bar = tk.Menu(self.root)
+        self.root.config(menu=self.menu_bar)
+        
+        # File menu
+        file_menu = tk.Menu(self.menu_bar, tearoff=0)
+        file_menu.add_command(label="Load .asm", command=self.load_asm_file)
+        file_menu.add_command(label="Save .asm", command=self.save_asm_file)
+        file_menu.add_separator()
+        file_menu.add_command(label="Exit", command=self.root.quit)
+        self.menu_bar.add_cascade(label="File", menu=file_menu)
+        
+        # AI menu
+        ai_menu = self.create_ai_menu()
+        self.menu_bar.add_cascade(label="AI Features", menu=ai_menu)
+        
         # Main frame
         self.main_frame = tk.Frame(self.root, bg=theme['bg_main'])
         self.main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -323,7 +478,7 @@ class SimulatorGUI:
         tk.Button(control_frame, text="Load .asm", command=self.load_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         tk.Button(control_frame, text="Save .asm", command=self.save_asm_file, bg=theme['btn2_bg'], fg=theme['btn2_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
-        # Add AI Explain button
+        # Add AI Explain button (quick access)
         tk.Button(control_frame, text="🤖 Explain", command=self.explain_code_with_ai, bg=theme['btn_explain_bg'], fg=theme['btn_explain_fg'], font=('Arial', 12, 'bold')).pack(side=tk.LEFT, padx=2)
         
         # Right panel - CPU state and memory

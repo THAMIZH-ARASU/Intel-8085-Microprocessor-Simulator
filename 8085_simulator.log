@@ -2066,3 +2066,18 @@
 2025-07-29 21:16:57,153 - INFO - Starting AI code explanation
 2025-07-29 21:16:57,153 - INFO - Preparing API request to Groq
 2025-07-29 21:17:02,351 - INFO - AI explanation completed successfully
+2025-07-29 21:35:50,165 - INFO - Initializing 8085 Simulator GUI
+2025-07-29 21:35:50,243 - INFO - Initializing AI Features
+2025-07-29 21:35:50,243 - INFO - API key found for AI features
+2025-07-29 21:35:50,244 - INFO - Memory initialized with 64KB space
+2025-07-29 21:35:50,244 - INFO - CPU initialized
+2025-07-29 21:35:50,244 - INFO - CPU instruction set initialized
+2025-07-29 21:35:50,244 - INFO - Initializing 8085 Assembler
+2025-07-29 21:35:50,622 - INFO - GUI initialization complete
+2025-07-29 21:35:50,623 - INFO - Starting GUI main loop
+2025-07-29 21:36:17,091 - INFO - Loaded assembly code from C:/PEC-26/PROJECTS/simple8085/AssemblyPrograms/fibonacci.asm
+2025-07-29 21:36:19,784 - INFO - Executing AI feature: explain
+2025-07-29 21:36:40,230 - INFO - Executing AI feature: optimize
+2025-07-29 21:37:05,789 - INFO - Executing AI feature: debug
+2025-07-29 21:37:17,954 - INFO - Executing AI feature: quiz
+2025-07-29 21:37:40,797 - INFO - Executing AI feature: analyze
